@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PG Education - Learn Today, Lead Tomorrow. Premium coaching for classes 6 to 12. Mathematics and Science experts.">
+    <meta name="keywords" content="PG Education, Coaching, CBSE, UP Board, Class 6 to 12, Mock Tests, Notes">
+    <meta name="theme-color" content="#1e3a8a">
+    <title>PG Education | Learn Today, Lead Tomorrow</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS (Glassmorphism & Theme) -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="light-mode">
+    
+    <!-- Loading Screen -->
+    <div id="loader" class="loader-container">
+        <div class="spinner"></div>
+        <h3 class="text-orange mt-3">PG Education</h3>
+    </div>
+
+    <!-- Animated Background Elements -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Navigation Bar (Glassmorphism) -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-gradient" href="index.html">
+                <i class="fa-solid fa-graduation-cap me-2 text-orange"></i>PG Education
+            </a>
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars text-primary-theme"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faculty.html">Faculty</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown">Resources</a>
+                        <ul class="dropdown-menu glass-dropdown">
+                            <li><a class="dropdown-item" href="notes.html">Notes</a></li>
+                            <li><a class="dropdown-item" href="pyq.html">Previous Year Papers</a></li>
+                            <li><a class="dropdown-item" href="mock-test.html">Mock Tests</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <button id="theme-toggle" class="btn btn-icon glass-btn"><i class="fa-solid fa-moon"></i></button>
+                    <a href="login.html" class="btn btn-outline-orange glass-btn rounded-pill px-4">Login</a>
+                    <a href="register.html" class="btn btn-primary-gradient rounded-pill px-4">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section d-flex align-items-center min-vh-100 position-relative pt-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                    <span class="badge bg-orange-subtle text-orange rounded-pill px-3 py-2 mb-3">Premium Education Institute</span>
+                    <h1 class="display-4 fw-bold mb-3 text-primary-theme">
+                        Empowering Minds, <br>
+                        <span class="text-orange">Shaping Futures.</span>
+                    </h1>
+                    <h3 class="fw-medium mb-4 typed-container">
+                        Learn Today, <span id="typed-text" class="text-gradient"></span>
+                    </h3>
+                    <p class="lead mb-4 text-muted-theme">Join PG Education for top-tier coaching in Mathematics and Science for CBSE and UP Board. Experience interactive learning, comprehensive notes, and real-time mock tests.</p>
+                    <div class="d-flex gap-3">
+                        <a href="courses.html" class="btn btn-primary-gradient rounded-pill px-4 py-2 fw-semibold shadow-lg">Explore Courses <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                        <a href="contact.html" class="btn glass-btn rounded-pill px-4 py-2 fw-semibold">Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0 text-center position-relative" data-aos="zoom-in" data-aos-duration="1200">
+                    <div class="floating-element float-1 glass-card p-3 rounded-4 position-absolute top-0 start-0">
+                        <i class="fa-solid fa-book-open text-orange fs-2"></i>
+                        <h6 class="mt-2 mb-0 fw-bold">Daily Notes</h6>
+                    </div>
+                    <div class="floating-element float-2 glass-card p-3 rounded-4 position-absolute bottom-0 end-0">
+                        <i class="fa-solid fa-laptop-code text-primary fs-2"></i>
+                        <h6 class="mt-2 mb-0 fw-bold">Online Tests</h6>
+                    </div>
+                    <!-- Placeholder for Hero Image, replaceable via CSS -->
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Students Learning" class="img-fluid rounded-5 shadow-lg hero-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Counters Section -->
+    <section class="counters-section py-5 position-relative z-1">
+        <div class="container">
+            <div class="glass-card rounded-5 p-5 shadow-lg" data-aos="fade-up">
+                <div class="row text-center g-4">
+                    <div class="col-md-3 col-6">
+                        <div class="counter-box">
+                            <i class="fa-solid fa-users text-orange fs-1 mb-3"></i>
+                            <h2 class="fw-bold text-primary-theme"><span id="live-students-count">0</span>+</h2>
+                            <p class="text-muted-theme mb-0 fw-medium">Active Students</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="counter-box">
+                            <i class="fa-solid fa-chalkboard-user text-primary fs-1 mb-3"></i>
+                            <h2 class="fw-bold text-primary-theme">2</h2>
+                            <p class="text-muted-theme mb-0 fw-medium">Expert Faculty</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="counter-box">
+                            <i class="fa-solid fa-book text-orange fs-1 mb-3"></i>
+                            <h2 class="fw-bold text-primary-theme">7</h2>
+                            <p class="text-muted-theme mb-0 fw-medium">Premium Courses</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="counter-box">
+                            <i class="fa-solid fa-trophy text-primary fs-1 mb-3"></i>
+                            <h2 class="fw-bold text-primary-theme">98%</h2>
+                            <p class="text-muted-theme mb-0 fw-medium">Success Rate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Courses Preview Section -->
+    <section class="courses-section py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h6 class="text-orange fw-bold text-uppercase">Academic Programs</h6>
+                <h2 class="display-6 fw-bold text-primary-theme">Explore Our Courses</h2>
+                <div class="divider mx-auto bg-orange mt-3"></div>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Course 1 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card course-card h-100 p-4 rounded-4 position-relative overflow-hidden">
+                        <div class="course-badge bg-primary text-white position-absolute top-0 end-0 px-3 py-1 rounded-bl-3 fw-bold">CBSE & UP</div>
+                        <div class="icon-box bg-primary-subtle text-primary rounded-circle mb-4 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                            <i class="fa-solid fa-school fs-3"></i>
+                        </div>
+                        <h4 class="fw-bold text-primary-theme mb-3">Class 6 – 8</h4>
+                        <p class="text-muted-theme mb-4">Foundation building courses covering fundamental Mathematics and Science concepts.</p>
+                        <button class="btn btn-outline-orange rounded-pill w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#courseModal1">View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Course 2 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card course-card h-100 p-4 rounded-4 position-relative overflow-hidden">
+                        <div class="course-badge bg-orange text-white position-absolute top-0 end-0 px-3 py-1 rounded-bl-3 fw-bold">CBSE & UP</div>
+                        <div class="icon-box bg-orange-subtle text-orange rounded-circle mb-4 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                            <i class="fa-solid fa-microscope fs-3"></i>
+                        </div>
+                        <h4 class="fw-bold text-primary-theme mb-3">Class 9 – 10</h4>
+                        <p class="text-muted-theme mb-4">Board exam preparation focusing on analytical skills, logic, and comprehensive syllabus coverage.</p>
+                        <button class="btn btn-outline-orange rounded-pill w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#courseModal2">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card course-card h-100 p-4 rounded-4 position-relative overflow-hidden">
+                        <div class="course-badge bg-primary text-white position-absolute top-0 end-0 px-3 py-1 rounded-bl-3 fw-bold">CBSE & UP</div>
+                        <div class="icon-box bg-primary-subtle text-primary rounded-circle mb-4 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                            <i class="fa-solid fa-square-root-variable fs-3"></i>
+                        </div>
+                        <h4 class="fw-bold text-primary-theme mb-3">Class 11 – 12</h4>
+                        <p class="text-muted-theme mb-4">Advanced level Physics, Chemistry, and Mathematics preparing students for boards and beyond.</p>
+                        <button class="btn btn-outline-orange rounded-pill w-100 fw-semibold" data-bs-toggle="modal" data-bs-target="#courseModal3">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <section class="faculty-section py-5 position-relative">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h6 class="text-orange fw-bold text-uppercase">Our Experts</h6>
+                <h2 class="display-6 fw-bold text-primary-theme">Meet Your Teachers</h2>
+                <div class="divider mx-auto bg-orange mt-3"></div>
+            </div>
+
+            <div class="row justify-content-center g-5">
+                <!-- Teacher 1 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card faculty-card rounded-4 overflow-hidden text-center p-4">
+                        <div class="faculty-img-wrapper mx-auto mb-4">
+                            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Mr. Priyanshu" class="img-fluid rounded-circle shadow border border-3 border-orange" style="width: 150px; height: 150px; object-fit: cover;">
+                        </div>
+                        <h4 class="fw-bold text-primary-theme mb-1">Mr. Priyanshu</h4>
+                        <p class="text-orange fw-semibold mb-3"><i class="fa-solid fa-calculator me-2"></i>Mathematics Expert</p>
+                        <p class="text-muted-theme small">Dedicated to making complex mathematical concepts easy, logical, and highly scoring for all board patterns.</p>
+                    </div>
+                </div>
+
+                <!-- Teacher 2 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card faculty-card rounded-4 overflow-hidden text-center p-4">
+                        <div class="faculty-img-wrapper mx-auto mb-4">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Mr. Ravi Yadav" class="img-fluid rounded-circle shadow border border-3 border-primary" style="width: 150px; height: 150px; object-fit: cover;">
+                        </div>
+                        <h4 class="fw-bold text-primary-theme mb-1">Mr. Ravi Yadav</h4>
+                        <p class="text-primary fw-semibold mb-3"><i class="fa-solid fa-flask me-2"></i>Science Expert</p>
+                        <p class="text-muted-theme small">Passionate about experiential learning, helping students master Physics, Chemistry, and Biology practically.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us & FAQ -->
+    <section class="why-choose-us py-5">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h6 class="text-orange fw-bold text-uppercase">Why PG Education?</h6>
+                    <h2 class="fw-bold text-primary-theme mb-4">A Blueprint for Academic Excellence</h2>
+                    
+                    <div class="d-flex mb-4">
+                        <div class="flex-shrink-0 me-3">
+                            <div class="icon-box bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="fa-solid fa-file-pdf fs-4"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold text-primary-theme">Premium Study Material</h5>
+                            <p class="text-muted-theme">High-quality, exam-oriented PDF notes and previous year papers curated by experts.</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex mb-4">
+                        <div class="flex-shrink-0 me-3">
+                            <div class="icon-box bg-orange-subtle text-orange rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="fa-solid fa-stopwatch fs-4"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold text-primary-theme">Real-time Mock Tests</h5>
+                            <p class="text-muted-theme">Timed assessments with instant scorecards, leaderboards, and detailed analytics.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="glass-card p-4 rounded-4 shadow-sm">
+                        <h4 class="fw-bold text-primary-theme mb-4">Frequently Asked Questions</h4>
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item glass-accordion mb-3 border-0 rounded-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed fw-semibold rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                        Which boards do you cover?
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body text-muted-theme">
+                                        We comprehensively cover the syllabus for both CBSE and UP Board curricula, aligning strictly with NCERT guidelines.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item glass-accordion mb-3 border-0 rounded-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed fw-semibold rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                        Are the mock tests free?
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body text-muted-theme">
+                                        Registered students gain access to scheduled mock tests via their student dashboard.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item glass-accordion border-0 rounded-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed fw-semibold rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                        How to pay fees?
+                                    </button>
+                                </h2>
+                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body text-muted-theme">
+                                        Fee status can be tracked in the student dashboard. Currently, offline payments are accepted and receipts are generated digitally.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="premium-footer glass-footer pt-5 pb-3 position-relative z-1 mt-5">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4 col-md-6">
+                    <a class="navbar-brand fw-bold text-gradient fs-3 d-block mb-3" href="index.html">
+                        <i class="fa-solid fa-graduation-cap me-2 text-orange"></i>PG Education
+                    </a>
+                    <p class="text-muted-theme mb-4">Empowering students with premium educational resources, expert faculty, and a vision to lead tomorrow.</p>
+                    <div class="social-links d-flex gap-3">
+                        <a href="#" class="glass-icon-btn"><i class="fa-brands fa-whatsapp text-success"></i></a>
+                        <a href="#" class="glass-icon-btn"><i class="fa-brands fa-youtube text-danger"></i></a>
+                        <a href="#" class="glass-icon-btn"><i class="fa-solid fa-envelope text-primary"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="about.html">About Us</a></li>
+                        <li class="mb-2"><a href="courses.html">Courses</a></li>
+                        <li class="mb-2"><a href="faculty.html">Faculty</a></li>
+                        <li class="mb-2"><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Resources</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="notes.html">Download Notes</a></li>
+                        <li class="mb-2"><a href="pyq.html">Previous Year Papers</a></li>
+                        <li class="mb-2"><a href="mock-test.html">Take Mock Test</a></li>
+                        <li class="mb-2"><a href="register.html">Student Portal</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Contact Info</h5>
+                    <ul class="list-unstyled contact-info text-muted-theme">
+                        <li class="mb-3"><i class="fa-solid fa-location-dot me-2 text-orange"></i> PG Education Center, Uttar Pradesh, India</li>
+                        <li class="mb-3"><i class="fa-solid fa-phone me-2 text-orange"></i> +91 9876543210</li>
+                        <li class="mb-3"><i class="fa-solid fa-envelope me-2 text-orange"></i> info@pgeducation.in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom pt-3 border-top border-secondary-subtle text-center text-muted-theme">
+                <p class="mb-0">&copy; 2026 PG Education. All Rights Reserved. | <a href="admin-login.html" class="text-muted-theme text-decoration-none">Admin Login</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <a href="#" class="scroll-top glass-btn" id="scrollTopBtn"><i class="fa-solid fa-arrow-up"></i></a>
+    <a href="https://wa.me/919876543210" target="_blank" class="whatsapp-float bg-success text-white rounded-circle shadow-lg d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" title="Chat with us">
+        <i class="fa-brands fa-whatsapp fs-3"></i>
+    </a>
+
+    <!-- ================= COURSE MODALS ================= -->
+    
+    <!-- Modal Class 6-8 -->
+    <div class="modal fade glass-modal" id="courseModal1" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-card border-0">
+                <div class="modal-header border-bottom border-secondary-subtle">
+                    <h5 class="modal-title fw-bold text-primary-theme"><i class="fa-solid fa-school text-primary me-2"></i>Class 6 – 8 Details</h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-muted-theme">
+                    <ul class="list-group list-group-flush bg-transparent">
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle"><strong>Teachers:</strong> Mr. Priyanshu (Math), Mr. Ravi Yadav (Science)</li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle"><strong>Days:</strong> Monday – Saturday (Sunday Holiday)</li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle"><strong>Timing:</strong> 7:00 AM – 9:00 AM</li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle"><strong>Boards:</strong> CBSE & UP Board</li>
+                    </ul>
+                </div>
+                <div class="modal-footer border-top border-secondary-subtle">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                    <a href="register.html" class="btn btn-primary-gradient rounded-pill px-4">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Class 9-10 -->
+    <div class="modal fade glass-modal" id="courseModal2" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-card border-0">
+                <div class="modal-header border-bottom border-secondary-subtle">
+                    <h5 class="modal-title fw-bold text-primary-theme"><i class="fa-solid fa-microscope text-orange me-2"></i>Class 9 – 10 Details</h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-muted-theme">
+                    <ul class="list-group list-group-flush bg-transparent">
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle"><strong>Teachers:</strong> Mr. Priyanshu (Math), Mr. Ravi Yadav (Science)</li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle"><strong>Days:</strong> Monday – Saturday (Sunday Holiday)</li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle"><strong>Timing:</strong> 4:00 PM – 6:00 PM</li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle"><strong>Boards:</strong> CBSE & UP Board</li>
+                    </ul>
+                </div>
+                <div class="modal-footer border-top border-secondary-subtle">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                    <a href="register.html" class="btn btn-primary-gradient rounded-pill px-4">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Class 11-12 -->
+    <div class="modal fade glass-modal" id="courseModal3" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-card border-0">
+                <div class="modal-header border-bottom border-secondary-subtle">
+                    <h5 class="modal-title fw-bold text-primary-theme"><i class="fa-solid fa-square-root-variable text-primary me-2"></i>Class 11 – 12 Details</h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-muted-theme">
+                    <ul class="list-group list-group-flush bg-transparent">
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle"><strong>Teachers:</strong> Mr. Priyanshu (Math), Mr. Ravi Yadav (Science)</li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle"><strong>Days:</strong> Monday – Saturday (Sunday Holiday)</li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle"><strong>Timing:</strong> 6:00 PM – 8:00 PM</li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle"><strong>Boards:</strong> CBSE & UP Board</li>
+                    </ul>
+                </div>
+                <div class="modal-footer border-top border-secondary-subtle">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                    <a href="register.html" class="btn btn-primary-gradient rounded-pill px-4">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK (Modular) -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"></script>
+    
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    
+    <!-- Custom Scripts -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/app.js"></script>
+    
+    <!-- Page Specific Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Typing Effect
+            if(document.getElementById('typed-text')){
+                new Typed('#typed-text', {
+                    strings: ['Lead Tomorrow.', 'Ace Your Boards.', 'Unlock Potential.'],
+                    typeSpeed: 50,
+                    backSpeed: 30,
+                    loop: true,
+                    backDelay: 2000
+                });
+            }
+            // Initialize AOS
+            AOS.init({ once: true, offset: 50 });
+        });
+    </script>
+</body>
+</html>

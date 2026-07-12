@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore premium courses at PG Education for Classes 6 to 12. Mathematics and Science coaching for CBSE and UP Board.">
+    <meta name="theme-color" content="#1e3a8a">
+    <title>Our Courses | PG Education</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="light-mode">
+    
+    <!-- Loading Screen -->
+    <div id="loader" class="loader-container">
+        <div class="spinner"></div>
+        <h3 class="text-orange mt-3">PG Education</h3>
+    </div>
+
+    <!-- Animated Background Elements -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-gradient" href="index.html">
+                <i class="fa-solid fa-graduation-cap me-2 text-orange"></i>PG Education
+            </a>
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars text-primary-theme"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faculty.html">Faculty</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown">Resources</a>
+                        <ul class="dropdown-menu glass-dropdown">
+                            <li><a class="dropdown-item" href="notes.html">Notes</a></li>
+                            <li><a class="dropdown-item" href="pyq.html">Previous Year Papers</a></li>
+                            <li><a class="dropdown-item" href="mock-test.html">Mock Tests</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <button id="theme-toggle" class="btn btn-icon glass-btn"><i class="fa-solid fa-moon"></i></button>
+                    <a href="login.html" class="btn btn-outline-orange glass-btn rounded-pill px-4">Login</a>
+                    <a href="register.html" class="btn btn-primary-gradient rounded-pill px-4">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header d-flex align-items-center justify-content-center pt-5 pb-4 mt-5">
+        <div class="container text-center" data-aos="fade-up">
+            <h1 class="display-4 fw-bold text-primary-theme">Our <span class="text-orange">Courses</span></h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center mb-0 mt-3">
+                    <li class="breadcrumb-item"><a href="index.html" class="text-muted-theme text-decoration-none hover-orange">Home</a></li>
+                    <li class="breadcrumb-item active text-orange fw-medium" aria-current="page">Courses</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Courses Grid Section -->
+    <section class="courses-section py-5 position-relative z-1">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h6 class="text-orange fw-bold text-uppercase">Academic Programs</h6>
+                <h2 class="fw-bold text-primary-theme">Curriculum Designed for Success</h2>
+                <p class="text-muted-theme mx-auto" style="max-width: 600px;">We specialize in Mathematics and Science, ensuring students build strong core concepts that align with both CBSE and UP Board syllabuses.</p>
+                <div class="divider mx-auto bg-orange mt-3"></div>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                <!-- Course 1: Class 6-8 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card course-card h-100 p-4 rounded-4 position-relative overflow-hidden text-center">
+                        <div class="course-badge bg-primary text-white position-absolute top-0 end-0 px-3 py-1 rounded-bl-3 fw-bold">CBSE & UP</div>
+                        <div class="icon-box bg-primary-subtle text-primary rounded-circle mx-auto mb-4 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                            <i class="fa-solid fa-school fs-2"></i>
+                        </div>
+                        <h3 class="fw-bold text-primary-theme mb-3">Class 6 – 8</h3>
+                        <h6 class="text-orange fw-semibold mb-3">Mathematics & Science</h6>
+                        <p class="text-muted-theme mb-4">Establishing a rock-solid foundation for young minds. We focus on conceptual clarity, logical reasoning, and basic scientific principles.</p>
+                        <button class="btn btn-outline-orange rounded-pill w-100 fw-semibold py-2" data-bs-toggle="modal" data-bs-target="#courseModal1">View Schedule <i class="fa-solid fa-calendar-days ms-2"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Course 2: Class 9-10 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card course-card h-100 p-4 rounded-4 position-relative overflow-hidden text-center">
+                        <div class="course-badge bg-orange text-white position-absolute top-0 end-0 px-3 py-1 rounded-bl-3 fw-bold">CBSE & UP</div>
+                        <div class="icon-box bg-orange-subtle text-orange rounded-circle mx-auto mb-4 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                            <i class="fa-solid fa-microscope fs-2"></i>
+                        </div>
+                        <h3 class="fw-bold text-primary-theme mb-3">Class 9 – 10</h3>
+                        <h6 class="text-orange fw-semibold mb-3">Mathematics & Science</h6>
+                        <p class="text-muted-theme mb-4">Board exam orientation starts here. Comprehensive syllabus coverage, rigorous practice, and analytical skill development.</p>
+                        <button class="btn btn-outline-orange rounded-pill w-100 fw-semibold py-2" data-bs-toggle="modal" data-bs-target="#courseModal2">View Schedule <i class="fa-solid fa-calendar-days ms-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- Course 3: Class 11-12 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="glass-card course-card h-100 p-4 rounded-4 position-relative overflow-hidden text-center">
+                        <div class="course-badge bg-primary text-white position-absolute top-0 end-0 px-3 py-1 rounded-bl-3 fw-bold">CBSE & UP</div>
+                        <div class="icon-box bg-primary-subtle text-primary rounded-circle mx-auto mb-4 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                            <i class="fa-solid fa-square-root-variable fs-2"></i>
+                        </div>
+                        <h3 class="fw-bold text-primary-theme mb-3">Class 11 – 12</h3>
+                        <h6 class="text-orange fw-semibold mb-3">Mathematics & Science</h6>
+                        <p class="text-muted-theme mb-4">Advanced curriculum designed to help students master higher-level concepts and achieve outstanding results in board examinations.</p>
+                        <button class="btn btn-outline-orange rounded-pill w-100 fw-semibold py-2" data-bs-toggle="modal" data-bs-target="#courseModal3">View Schedule <i class="fa-solid fa-calendar-days ms-2"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="premium-footer glass-footer pt-5 pb-3 position-relative z-1 mt-5">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4 col-md-6">
+                    <a class="navbar-brand fw-bold text-gradient fs-3 d-block mb-3" href="index.html">
+                        <i class="fa-solid fa-graduation-cap me-2 text-orange"></i>PG Education
+                    </a>
+                    <p class="text-muted-theme mb-4">Empowering students with premium educational resources, expert faculty, and a vision to lead tomorrow.</p>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="index.html">Home</a></li>
+                        <li class="mb-2"><a href="faculty.html">Faculty</a></li>
+                        <li class="mb-2"><a href="contact.html">Contact Us</a></li>
+                        <li class="mb-2"><a href="register.html">Admissions</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Contact Info</h5>
+                    <ul class="list-unstyled contact-info text-muted-theme">
+                        <li class="mb-3"><i class="fa-solid fa-location-dot me-2 text-orange"></i> PG Education Center, Uttar Pradesh, India</li>
+                        <li class="mb-3"><i class="fa-solid fa-phone me-2 text-orange"></i> +91 9876543210</li>
+                        <li class="mb-3"><i class="fa-solid fa-envelope me-2 text-orange"></i> info@pgeducation.in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom pt-3 border-top border-secondary-subtle text-center text-muted-theme">
+                <p class="mb-0">&copy; 2026 PG Education. All Rights Reserved. | <a href="admin-login.html" class="text-muted-theme text-decoration-none">Admin Login</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= COURSE MODALS (Specific Timings per rules) ================= -->
+    
+    <!-- Modal Class 6-8 -->
+    <div class="modal fade glass-modal" id="courseModal1" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-card border-0">
+                <div class="modal-header border-bottom border-secondary-subtle">
+                    <h5 class="modal-title fw-bold text-primary-theme"><i class="fa-solid fa-school text-primary me-2"></i>Class 6 – 8 Schedule</h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-muted-theme">
+                    <div class="text-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Students" class="img-fluid rounded-3 shadow-sm mb-3" style="max-height: 150px; width: 100%; object-fit: cover;">
+                    </div>
+                    <ul class="list-group list-group-flush bg-transparent">
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle d-flex justify-content-between align-items-center">
+                            <span><i class="fa-solid fa-chalkboard-user me-2 text-orange"></i><strong>Teachers</strong></span>
+                            <span class="text-end">Mr. Priyanshu (Math)<br>Mr. Ravi Yadav (Science)</span>
+                        </li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle d-flex justify-content-between align-items-center">
+                            <span><i class="fa-solid fa-calendar-week me-2 text-primary"></i><strong>Days</strong></span>
+                            <span>Monday – Saturday<br><small class="text-danger fw-bold">Sunday Holiday</small></span>
+                        </li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle d-flex justify-content-between align-items-center">
+                            <span><i class="fa-solid fa-clock me-2 text-orange"></i><strong>Timing</strong></span>
+                            <span class="fw-bold">7:00 AM – 9:00 AM</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer border-top border-secondary-subtle">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                    <a href="register.html" class="btn btn-primary-gradient rounded-pill px-4">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Class 9-10 -->
+    <div class="modal fade glass-modal" id="courseModal2" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-card border-0">
+                <div class="modal-header border-bottom border-secondary-subtle">
+                    <h5 class="modal-title fw-bold text-primary-theme"><i class="fa-solid fa-microscope text-orange me-2"></i>Class 9 – 10 Schedule</h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-muted-theme">
+                    <div class="text-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Students" class="img-fluid rounded-3 shadow-sm mb-3" style="max-height: 150px; width: 100%; object-fit: cover;">
+                    </div>
+                    <ul class="list-group list-group-flush bg-transparent">
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle d-flex justify-content-between align-items-center">
+                            <span><i class="fa-solid fa-chalkboard-user me-2 text-orange"></i><strong>Teachers</strong></span>
+                            <span class="text-end">Mr. Priyanshu (Math)<br>Mr. Ravi Yadav (Science)</span>
+                        </li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle d-flex justify-content-between align-items-center">
+                            <span><i class="fa-solid fa-calendar-week me-2 text-primary"></i><strong>Days</strong></span>
+                            <span>Monday – Saturday<br><small class="text-danger fw-bold">Sunday Holiday</small></span>
+                        </li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle d-flex justify-content-between align-items-center">
+                            <span><i class="fa-solid fa-clock me-2 text-orange"></i><strong>Timing</strong></span>
+                            <span class="fw-bold">4:00 PM – 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer border-top border-secondary-subtle">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                    <a href="register.html" class="btn btn-primary-gradient rounded-pill px-4">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Class 11-12 -->
+    <div class="modal fade glass-modal" id="courseModal3" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content glass-card border-0">
+                <div class="modal-header border-bottom border-secondary-subtle">
+                    <h5 class="modal-title fw-bold text-primary-theme"><i class="fa-solid fa-square-root-variable text-primary me-2"></i>Class 11 – 12 Schedule</h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-muted-theme">
+                    <div class="text-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1629853965903-53531fb1737e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Students" class="img-fluid rounded-3 shadow-sm mb-3" style="max-height: 150px; width: 100%; object-fit: cover;">
+                    </div>
+                    <ul class="list-group list-group-flush bg-transparent">
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle d-flex justify-content-between align-items-center">
+                            <span><i class="fa-solid fa-chalkboard-user me-2 text-orange"></i><strong>Teachers</strong></span>
+                            <span class="text-end">Mr. Priyanshu (Math)<br>Mr. Ravi Yadav (Science)</span>
+                        </li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle d-flex justify-content-between align-items-center">
+                            <span><i class="fa-solid fa-calendar-week me-2 text-primary"></i><strong>Days</strong></span>
+                            <span>Monday – Saturday<br><small class="text-danger fw-bold">Sunday Holiday</small></span>
+                        </li>
+                        <li class="list-group-item bg-transparent text-muted-theme border-secondary-subtle d-flex justify-content-between align-items-center">
+                            <span><i class="fa-solid fa-clock me-2 text-orange"></i><strong>Timing</strong></span>
+                            <span class="fw-bold">6:00 PM – 8:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer border-top border-secondary-subtle">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                    <a href="register.html" class="btn btn-primary-gradient rounded-pill px-4">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <a href="#" class="scroll-top glass-btn" id="scrollTopBtn"><i class="fa-solid fa-arrow-up"></i></a>
+
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            AOS.init({ once: true, offset: 50 });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About PG Education - Empowering students with premium coaching for classes 6 to 12. Learn Today, Lead Tomorrow.">
+    <meta name="theme-color" content="#1e3a8a">
+    <title>About Us | PG Education</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="light-mode">
+    
+    <!-- Loading Screen -->
+    <div id="loader" class="loader-container">
+        <div class="spinner"></div>
+        <h3 class="text-orange mt-3">PG Education</h3>
+    </div>
+
+    <!-- Animated Background Elements -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-gradient" href="index.html">
+                <i class="fa-solid fa-graduation-cap me-2 text-orange"></i>PG Education
+            </a>
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars text-primary-theme"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faculty.html">Faculty</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown">Resources</a>
+                        <ul class="dropdown-menu glass-dropdown">
+                            <li><a class="dropdown-item" href="notes.html">Notes</a></li>
+                            <li><a class="dropdown-item" href="pyq.html">Previous Year Papers</a></li>
+                            <li><a class="dropdown-item" href="mock-test.html">Mock Tests</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <button id="theme-toggle" class="btn btn-icon glass-btn"><i class="fa-solid fa-moon"></i></button>
+                    <a href="login.html" class="btn btn-outline-orange glass-btn rounded-pill px-4">Login</a>
+                    <a href="register.html" class="btn btn-primary-gradient rounded-pill px-4">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header d-flex align-items-center justify-content-center pt-5 pb-4 mt-5">
+        <div class="container text-center" data-aos="fade-up">
+            <h1 class="display-4 fw-bold text-primary-theme">About <span class="text-orange">Us</span></h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center mb-0 mt-3">
+                    <li class="breadcrumb-item"><a href="index.html" class="text-muted-theme text-decoration-none hover-orange">Home</a></li>
+                    <li class="breadcrumb-item active text-orange fw-medium" aria-current="page">About</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Who We Are Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Students in Classroom" class="img-fluid rounded-4 shadow-lg border border-3 border-orange position-relative z-1">
+                        <!-- Decorative square -->
+                        <div class="position-absolute bg-primary-subtle rounded-4" style="width: 100%; height: 100%; top: -20px; left: -20px; z-index: 0;"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <h6 class="text-orange fw-bold text-uppercase">The Journey</h6>
+                    <h2 class="fw-bold text-primary-theme mb-4">Shaping the Leaders of Tomorrow</h2>
+                    <p class="text-muted-theme mb-4">At PG Education, we believe that every student has the potential to achieve academic excellence when provided with the right guidance, environment, and resources. Founded with the motto "Learn Today, Lead Tomorrow," we focus on building a strong foundation for students from Classes 6 to 12.</p>
+                    <p class="text-muted-theme mb-4">Our approach blends traditional classroom discipline with modern technological tools—from interactive mock tests to comprehensive digital notes—ensuring our students are always one step ahead in their CBSE and UP Board examinations.</p>
+                    
+                    <div class="row g-4 mt-2">
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-box bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                    <i class="fa-solid fa-chalkboard-user fs-5"></i>
+                                </div>
+                                <h6 class="fw-bold text-primary-theme mb-0">Expert Faculty</h6>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-box bg-orange-subtle text-orange rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+                                    <i class="fa-solid fa-laptop-code fs-5"></i>
+                                </div>
+                                <h6 class="fw-bold text-primary-theme mb-0">Digital ERP</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="py-5 position-relative z-1">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card p-5 rounded-4 shadow-sm h-100 text-center">
+                        <div class="icon-box bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-4" style="width: 80px; height: 80px;">
+                            <i class="fa-solid fa-bullseye fs-1"></i>
+                        </div>
+                        <h3 class="fw-bold text-primary-theme mb-3">Our Mission</h3>
+                        <p class="text-muted-theme">To deliver high-quality, accessible, and structured education in Mathematics and Science, empowering students to confidently tackle board examinations and competitive challenges.</p>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card p-5 rounded-4 shadow-sm h-100 text-center">
+                        <div class="icon-box bg-orange text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-4" style="width: 80px; height: 80px;">
+                            <i class="fa-solid fa-eye fs-1"></i>
+                        </div>
+                        <h3 class="fw-bold text-primary-theme mb-3">Our Vision</h3>
+                        <p class="text-muted-theme">To become the region's most trusted educational institution by blending proven pedagogical methods with innovative digital learning ecosystems.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="premium-footer glass-footer pt-5 pb-3 position-relative z-1 mt-5">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4 col-md-6">
+                    <a class="navbar-brand fw-bold text-gradient fs-3 d-block mb-3" href="index.html">
+                        <i class="fa-solid fa-graduation-cap me-2 text-orange"></i>PG Education
+                    </a>
+                    <p class="text-muted-theme mb-4">Empowering students with premium educational resources, expert faculty, and a vision to lead tomorrow.</p>
+                    <div class="social-links d-flex gap-3">
+                        <a href="#" class="glass-icon-btn"><i class="fa-brands fa-whatsapp text-success"></i></a>
+                        <a href="#" class="glass-icon-btn"><i class="fa-brands fa-youtube text-danger"></i></a>
+                        <a href="#" class="glass-icon-btn"><i class="fa-solid fa-envelope text-primary"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="about.html">About Us</a></li>
+                        <li class="mb-2"><a href="courses.html">Courses</a></li>
+                        <li class="mb-2"><a href="faculty.html">Faculty</a></li>
+                        <li class="mb-2"><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Resources</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="notes.html">Download Notes</a></li>
+                        <li class="mb-2"><a href="pyq.html">Previous Year Papers</a></li>
+                        <li class="mb-2"><a href="mock-test.html">Take Mock Test</a></li>
+                        <li class="mb-2"><a href="register.html">Student Portal</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Contact Info</h5>
+                    <ul class="list-unstyled contact-info text-muted-theme">
+                        <li class="mb-3"><i class="fa-solid fa-location-dot me-2 text-orange"></i> PG Education Center, Uttar Pradesh, India</li>
+                        <li class="mb-3"><i class="fa-solid fa-phone me-2 text-orange"></i> +91 9876543210</li>
+                        <li class="mb-3"><i class="fa-solid fa-envelope me-2 text-orange"></i> info@pgeducation.in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom pt-3 border-top border-secondary-subtle text-center text-muted-theme">
+                <p class="mb-0">&copy; 2026 PG Education. All Rights Reserved. | <a href="admin-login.html" class="text-muted-theme text-decoration-none">Admin Login</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <a href="#" class="scroll-top glass-btn" id="scrollTopBtn"><i class="fa-solid fa-arrow-up"></i></a>
+
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            AOS.init({ once: true, offset: 50 });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+# Fallback for 404 errors - Redirects to Home Page
+/*    /index.html   404

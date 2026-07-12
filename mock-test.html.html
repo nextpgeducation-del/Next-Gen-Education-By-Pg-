@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e3a8a">
+    <title>Mock Test | PG Education</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background-color: var(--bg-main);
+            overflow-x: hidden;
+        }
+
+        /* Exam Navbar (Distraction Free) */
+        .exam-navbar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .exam-container {
+            margin-top: 90px;
+            padding-bottom: 50px;
+        }
+
+        /* Timer Styling */
+        .timer-box {
+            background: rgba(239, 68, 68, 0.1); /* Red tint */
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            animation: pulseTimer 2s infinite;
+        }
+        @keyframes pulseTimer {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        /* Options Styling */
+        .option-label {
+            display: block;
+            background: var(--input-bg);
+            border: 2px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .option-label:hover {
+            border-color: var(--brand-orange);
+            background: rgba(249, 115, 22, 0.05);
+        }
+
+        .option-input:checked + .option-label {
+            border-color: var(--brand-blue-light);
+            background: rgba(59, 130, 246, 0.1);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+        }
+
+        .option-input {
+            display: none;
+        }
+
+        /* Progress Bar */
+        .progress-glass {
+            background: rgba(255, 255, 255, 0.2);
+            height: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+        .progress-bar-fill {
+            background: linear-gradient(90deg, var(--brand-blue), var(--brand-blue-light));
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* Result Panel (Hidden initially) */
+        #resultPanel {
+            display: none;
+        }
+        
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(var(--brand-orange) 0%, var(--glass-border) 0%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .score-inner {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="light-mode">
+
+    <!-- Animated Background -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <!-- Exam Navbar -->
+    <nav class="exam-navbar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <i class="fa-solid fa-graduation-cap text-orange fs-3 me-2"></i>
+                <div>
+                    <h5 class="fw-bold text-primary-theme mb-0 lh-1">PG Education</h5>
+                    <small class="text-muted-theme" style="font-size: 11px;">Mock Test Environment</small>
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <button id="theme-toggle" class="btn btn-icon glass-btn rounded-circle"><i class="fa-solid fa-moon"></i></button>
+                <div class="d-flex align-items-center gap-2 border-start border-secondary-subtle ps-3">
+                    <img src="" id="examStudentPhoto" class="rounded-circle" style="width: 35px; height: 35px; object-fit: cover; display: none;">
+                    <span class="fw-bold text-primary-theme d-none d-md-block" id="examStudentName">Student</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container exam-container">
+        
+        <!-- Loading State -->
+        <div id="loadingTest" class="text-center py-5">
+            <div class="spinner-border text-orange mb-3" style="width: 3rem; height: 3rem;"></div>
+            <h4 class="text-primary-theme fw-bold">Loading Your Test...</h4>
+            <p class="text-muted-theme">Please do not refresh the page.</p>
+        </div>
+
+        <!-- EXAM PANEL -->
+        <div id="examPanel" style="display: none;">
+            
+            <!-- Header (Title & Timer) -->
+            <div class="glass-card p-4 rounded-4 shadow-sm mb-4">
+                <div class="row align-items-center">
+                    <div class="col-md-8 text-center text-md-start mb-3 mb-md-0">
+                        <span class="badge bg-primary-subtle text-primary px-3 py-1 mb-2 rounded-pill" id="displaySubject">Subject</span>
+                        <h3 class="fw-bold text-primary-theme mb-1" id="displayTitle">Test Title</h3>
+                        <p class="text-muted-theme mb-0 small">Read questions carefully before answering. Do not switch tabs.</p>
+                    </div>
+                    <div class="col-md-4 text-center text-md-end">
+                        <div class="timer-box">
+                            <i class="fa-solid fa-stopwatch"></i> <span id="timeRemaining">00:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="mb-4">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="fw-bold text-primary-theme small">Progress</span>
+                    <span class="fw-bold text-orange small" id="progressText">Question 1 of X</span>
+                </div>
+                <div class="progress-glass">
+                    <div class="progress-bar-fill" id="progressBar"></div>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="glass-card p-4 p-md-5 rounded-4 shadow-sm mb-4 position-relative">
+                <h4 class="fw-bold text-primary-theme mb-4" id="questionText" style="line-height: 1.5;">Q. Loading question...</h4>
+                
+                <div id="optionsContainer">
+                    <!-- Options injected via JS -->
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="d-flex justify-content-between align-items-center">
+                <button class="btn glass-btn px-4 rounded-pill fw-bold" id="btnPrev" disabled><i class="fa-solid fa-arrow-left me-2"></i> Previous</button>
+                <button class="btn btn-primary-gradient px-5 rounded-pill fw-bold" id="btnNext">Next <i class="fa-solid fa-arrow-right ms-2"></i></button>
+                <button class="btn btn-success px-5 rounded-pill fw-bold" id="btnSubmit" style="display: none;"><i class="fa-solid fa-check-double me-2"></i> Submit Test</button>
+            </div>
+        </div>
+
+        <!-- RESULT PANEL -->
+        <div id="resultPanel">
+            <div class="glass-card p-4 p-md-5 rounded-4 shadow-lg text-center max-w-600 mx-auto" style="max-width: 600px;">
+                <div class="mb-4">
+                    <div class="icon-box bg-success-subtle text-success rounded-circle mx-auto d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                        <i class="fa-solid fa-trophy fs-1"></i>
+                    </div>
+                </div>
+                
+                <h2 class="fw-bold text-primary-theme mb-2">Test Submitted!</h2>
+                <p class="text-muted-theme mb-4">Your performance has been recorded successfully.</p>
+                
+                <!-- Circular Progress Score -->
+                <div class="score-circle mb-4" id="scoreCircle">
+                    <div class="score-inner">
+                        <h2 class="fw-bold text-primary-theme mb-0" id="resultScore">0/0</h2>
+                        <span class="text-muted-theme small">Score</span>
+                    </div>
+                </div>
+                
+                <div class="row g-3 mb-5">
+                    <div class="col-6">
+                        <div class="p-3 border border-secondary-subtle rounded-3 bg-transparent">
+                            <p class="text-muted-theme mb-1 small fw-medium">Accuracy</p>
+                            <h4 class="fw-bold text-primary-theme mb-0" id="resultAccuracy">0%</h4>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-3 border border-secondary-subtle rounded-3 bg-transparent">
+                            <p class="text-muted-theme mb-1 small fw-medium">Time Taken</p>
+                            <h4 class="fw-bold text-primary-theme mb-0" id="resultTime">0m 0s</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="dashboard-student.html" class="btn btn-primary-gradient rounded-pill px-5 py-2 fw-bold w-100">
+                    <i class="fa-solid fa-house me-2"></i> Return to Dashboard
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Firebase SDK & Custom Scripts -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/mock-test.js"></script>
+</body>
+</html>

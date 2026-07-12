@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e3a8a">
+    <title>Admin Dashboard | PG Education</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Dashboard Specific Styles */
+        body {
+            background-color: var(--bg-main);
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styling */
+        .admin-sidebar {
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1040;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--glass-border);
+            padding-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 10px;
+            margin: 5px 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sidebar-link:hover, .sidebar-link.active {
+            background: var(--brand-orange);
+            color: #fff !important;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+        }
+
+        .sidebar-link i {
+            width: 25px;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        .admin-main-content {
+            margin-left: 280px;
+            padding: 20px;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Top Navbar */
+        .admin-topbar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            box-shadow: var(--glass-shadow);
+        }
+
+        /* Stats Cards */
+        .stat-card {
+            border-left: 4px solid var(--brand-orange);
+        }
+        
+        .stat-card.blue-border { border-left-color: var(--brand-blue-light); }
+        .stat-card.green-border { border-left-color: #10b981; }
+        .stat-card.red-border { border-left-color: #ef4444; }
+
+        /* Tables */
+        .table-glass {
+            background: transparent;
+            color: var(--text-primary);
+        }
+        .table-glass th {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--brand-orange);
+            font-weight: 600;
+        }
+        .table-glass td {
+            background: transparent;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--glass-border);
+            vertical-align: middle;
+        }
+        body.dark-mode .table-glass th, body.dark-mode .table-glass td {
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .admin-sidebar {
+                transform: translateX(-100%);
+            }
+            .admin-sidebar.show {
+                transform: translateX(0);
+            }
+            .admin-main-content {
+                margin-left: 0;
+            }
+        }
+
+        /* Tab Content Control */
+        .dashboard-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .dashboard-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+    <!-- Security Check Script (Runs before page loads) -->
+    <script>
+        if (sessionStorage.getItem('isAdminAuthenticated') !== 'true') {
+            window.location.href = 'admin-login.html';
+        }
+    </script>
+</head>
+<body class="light-mode">
+
+    <!-- Sidebar -->
+    <nav class="admin-sidebar" id="adminSidebar">
+        <div class="text-center mb-4 px-3">
+            <h4 class="fw-bold text-gradient mb-0"><i class="fa-solid fa-graduation-cap text-orange"></i> PG Education</h4>
+            <span class="badge bg-danger mt-2">Admin Portal</span>
+        </div>
+
+        <div class="sidebar-menu">
+            <div class="sidebar-link active" data-target="overview-section">
+                <i class="fa-solid fa-chart-pie"></i> Dashboard
+            </div>
+            <div class="sidebar-link" data-target="students-section">
+                <i class="fa-solid fa-users"></i> Students
+            </div>
+            <div class="sidebar-link" data-target="fees-section">
+                <i class="fa-solid fa-file-invoice-dollar"></i> Fee Management
+            </div>
+            <div class="sidebar-link" data-target="teachers-section">
+                <i class="fa-solid fa-chalkboard-user"></i> Teachers
+            </div>
+            <div class="sidebar-link" data-target="resources-section">
+                <i class="fa-solid fa-book"></i> Notes & Papers
+            </div>
+            <div class="sidebar-link" data-target="mock-tests-section">
+                <i class="fa-solid fa-stopwatch"></i> Mock Tests
+            </div>
+            <div class="sidebar-link" data-target="gallery-section">
+                <i class="fa-solid fa-images"></i> Gallery Upload
+            </div>
+            <div class="sidebar-link text-danger mt-5" id="adminLogoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="admin-main-content">
+        
+        <!-- Topbar -->
+        <div class="admin-topbar">
+            <div class="d-flex align-items-center">
+                <button class="btn glass-btn d-lg-none me-3" id="sidebarToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h5 class="fw-bold text-primary-theme mb-0" id="currentSectionTitle">Dashboard Overview</h5>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <button id="theme-toggle" class="btn btn-icon glass-btn rounded-circle"><i class="fa-solid fa-moon"></i></button>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-weight: bold;">
+                        A
+                    </div>
+                    <div class="d-none d-md-block">
+                        <p class="mb-0 fw-bold text-primary-theme small">UltimateAdmin</p>
+                        <p class="mb-0 text-success small" style="font-size: 10px;"><i class="fa-solid fa-circle me-1"></i>Online</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SECTION 1: OVERVIEW -->
+        <!-- ============================================== -->
+        <section id="overview-section" class="dashboard-section active">
+            <!-- Stats Row -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-3 col-md-6">
+                    <div class="glass-card stat-card p-4 rounded-4 shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-muted-theme mb-1 fw-medium small">Total Students</p>
+                                <h3 class="fw-bold text-primary-theme mb-0" id="statTotalStudents">0</h3>
+                            </div>
+                            <div class="bg-orange-subtle text-orange rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="fa-solid fa-users fs-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="glass-card stat-card blue-border p-4 rounded-4 shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-muted-theme mb-1 fw-medium small">Today's Registrations</p>
+                                <h3 class="fw-bold text-primary-theme mb-0" id="statTodayReg">0</h3>
+                            </div>
+                            <div class="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                <i class="fa-solid fa-user-plus fs-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="glass-card stat-card green-border p-4 rounded-4 shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-muted-theme mb-1 fw-medium small">Fee Collected (Month)</p>
+                                <h3 class="fw-bold text-primary-theme mb-0">₹<span id="statFeeCollected">0</span></h3>
+                            </div>
+                            <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; opacity: 0.8;">
+                                <i class="fa-solid fa-indian-rupee-sign fs-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="glass-card stat-card red-border p-4 rounded-4 shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="text-muted-theme mb-1 fw-medium small">Pending Fees</p>
+                                <h3 class="fw-bold text-primary-theme mb-0" id="statPendingFees">0</h3>
+                            </div>
+                            <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; opacity: 0.8;">
+                                <i class="fa-solid fa-triangle-exclamation fs-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity & Chart placeholder -->
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="glass-card p-4 rounded-4 shadow-sm h-100">
+                        <h5 class="fw-bold text-primary-theme border-bottom border-secondary-subtle pb-3 mb-3">Recent Registrations</h5>
+                        <div class="table-responsive">
+                            <table class="table table-glass align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th>Class</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentStudentsTable">
+                                    <tr><td colspan="4" class="text-center">Loading...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-end mt-2">
+                            <button class="btn btn-sm btn-outline-orange rounded-pill px-3" onclick="document.querySelector('[data-target=\'students-section\']').click()">View All</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="glass-card p-4 rounded-4 shadow-sm h-100">
+                        <h5 class="fw-bold text-primary-theme border-bottom border-secondary-subtle pb-3 mb-3">System Actions</h5>
+                        <div class="d-grid gap-3">
+                            <button class="btn btn-primary-gradient rounded-pill py-2" onclick="document.querySelector('[data-target=\'fees-section\']').click()"><i class="fa-solid fa-plus me-2"></i> Update Fee Status</button>
+                            <button class="btn btn-outline-orange rounded-pill py-2" onclick="document.querySelector('[data-target=\'resources-section\']').click()"><i class="fa-solid fa-upload me-2"></i> Upload Notes</button>
+                            <button class="btn btn-outline-primary rounded-pill py-2" onclick="document.querySelector('[data-target=\'mock-tests-section\']').click()"><i class="fa-solid fa-stopwatch me-2"></i> Create Mock Test</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 2: STUDENTS -->
+        <!-- ============================================== -->
+        <section id="students-section" class="dashboard-section">
+            <div class="glass-card p-4 rounded-4 shadow-sm mb-4">
+                <div class="row align-items-center mb-4">
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-secondary-subtle"><i class="fa-solid fa-search text-muted-theme"></i></span>
+                            <input type="text" id="searchStudentInput" class="form-control" placeholder="Search by Name, Mobile or ID...">
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3 mb-md-0">
+                        <select class="form-select" id="filterClassSelect">
+                            <option value="All">All Classes</option>
+                            <option value="6">Class 6</option>
+                            <option value="7">Class 7</option>
+                            <option value="8">Class 8</option>
+                            <option value="9">Class 9</option>
+                            <option value="10">Class 10</option>
+                            <option value="11">Class 11</option>
+                            <option value="12">Class 12</option>
+                        </select>
+                    </div>
+                    <div class="col-md-5 text-md-end">
+                        <button class="btn btn-outline-danger rounded-pill px-4" id="viewDeletedStudentsBtn"><i class="fa-solid fa-trash-can me-2"></i>Deleted/Terminated</button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-glass align-middle text-nowrap" id="studentsMainTable">
+                        <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>ID & Adm No</th>
+                                <th>Student Details</th>
+                                <th>Class & School</th>
+                                <th>Mobile</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentListBody">
+                            <tr><td colspan="7" class="text-center py-4"><div class="spinner-border text-orange"></div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 3: FEE MANAGEMENT -->
+        <!-- ============================================== -->
+        <section id="fees-section" class="dashboard-section">
+            <div class="row g-4">
+                <!-- Search Student for Fees -->
+                <div class="col-md-12">
+                    <div class="glass-card p-4 rounded-4 shadow-sm">
+                        <h5 class="fw-bold text-primary-theme mb-3">Fee Manager</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <input type="text" id="feeSearchInput" class="form-control" placeholder="Enter Student Mobile No. or ID">
+                                    <button class="btn btn-primary-gradient px-4" id="btnSearchFeeStudent">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fee Result Panel (Hidden initially) -->
+                <div class="col-md-12" id="feeStudentDetailsPanel" style="display: none;">
+                    <div class="glass-card p-4 rounded-4 shadow-sm">
+                        <div class="d-flex align-items-center mb-4 border-bottom border-secondary-subtle pb-3">
+                            <img src="" id="feeStudentPhoto" class="rounded-circle me-3" style="width:60px; height:60px; object-fit:cover;">
+                            <div>
+                                <h4 class="fw-bold text-primary-theme mb-0" id="feeStudentName">Student Name</h4>
+                                <p class="text-muted-theme mb-0 small"><span id="feeStudentID">ID</span> | Class <span id="feeStudentClass">Class</span> | Mobile: <span id="feeStudentMobile">Mobile</span></p>
+                            </div>
+                        </div>
+
+                        <h5 class="fw-bold text-primary-theme mb-3">12 Months Fee Record</h5>
+                        <div class="table-responsive">
+                            <table class="table table-glass align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Month</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Payment Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="feeMonthsBody">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 4: TEACHERS -->
+        <!-- ============================================== -->
+        <section id="teachers-section" class="dashboard-section">
+            <div class="glass-card p-4 rounded-4 shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary-subtle pb-3">
+                    <h5 class="fw-bold text-primary-theme mb-0">Faculty Directory</h5>
+                    <!-- Button to add new teacher if needed, though req says only 2 -->
+                    <button class="btn btn-sm btn-primary-gradient rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#addTeacherModal"><i class="fa-solid fa-plus me-2"></i>Add Teacher</button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-glass align-middle">
+                        <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Name</th>
+                                <th>Subject</th>
+                                <th>Mobile</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="teachersTableBody">
+                            <!-- Populated by JS. Should show Mr. Priyanshu and Mr. Ravi Yadav -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 5: RESOURCES (Notes & PYQ) -->
+        <!-- ============================================== -->
+        <section id="resources-section" class="dashboard-section">
+            <div class="row g-4">
+                <!-- Notes Upload -->
+                <div class="col-lg-6">
+                    <div class="glass-card p-4 rounded-4 shadow-sm h-100">
+                        <h5 class="fw-bold text-primary-theme mb-4"><i class="fa-solid fa-file-pdf text-orange me-2"></i>Upload Study Notes</h5>
+                        <form id="uploadNotesForm">
+                            <div class="mb-3">
+                                <label class="form-label small">Class</label>
+                                <select class="form-select" id="noteClass" required>
+                                    <option value="6-8">Class 6 - 8</option>
+                                    <option value="9-10">Class 9 - 10</option>
+                                    <option value="11-12">Class 11 - 12</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small">Subject</label>
+                                <select class="form-select" id="noteSubject" required>
+                                    <option value="Mathematics">Mathematics</option>
+                                    <option value="Science">Science (Phy/Chem/Bio)</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small">Chapter / Topic Title</label>
+                                <input type="text" class="form-control" id="noteTitle" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label small">PDF File URL (Firebase Storage link or Drive link)</label>
+                                <input type="url" class="form-control" id="notePdfUrl" placeholder="https://..." required>
+                                <div class="form-text small text-muted-theme">For production, use external secure links or Firebase Storage direct links.</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary-gradient w-100 rounded-pill py-2">Publish Note</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- PYQ Upload -->
+                <div class="col-lg-6">
+                    <div class="glass-card p-4 rounded-4 shadow-sm h-100">
+                        <h5 class="fw-bold text-primary-theme mb-4"><i class="fa-solid fa-file-lines text-primary me-2"></i>Upload Previous Year Papers</h5>
+                        <form id="uploadPyqForm">
+                            <div class="mb-3">
+                                <label class="form-label small">Board</label>
+                                <select class="form-select" id="pyqBoard" required>
+                                    <option value="CBSE">CBSE</option>
+                                    <option value="UP">UP Board</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small">Class & Year</label>
+                                <div class="input-group">
+                                    <select class="form-select" id="pyqClass" required>
+                                        <option value="10">Class 10</option>
+                                        <option value="12">Class 12</option>
+                                    </select>
+                                    <input type="text" class="form-control" id="pyqYear" placeholder="e.g. 2023" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small">Paper Title</label>
+                                <input type="text" class="form-control" id="pyqTitle" placeholder="Maths Standard Paper" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label small">PDF File URL</label>
+                                <input type="url" class="form-control" id="pyqPdfUrl" placeholder="https://..." required>
+                            </div>
+                            <button type="submit" class="btn btn-outline-orange w-100 rounded-pill py-2">Publish Paper</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 6: MOCK TESTS -->
+        <!-- ============================================== -->
+        <section id="mock-tests-section" class="dashboard-section">
+            <div class="glass-card p-4 rounded-4 shadow-sm">
+                <h5 class="fw-bold text-primary-theme border-bottom border-secondary-subtle pb-3 mb-4">Create New Mock Test</h5>
+                <form id="createMockTestForm">
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <label class="form-label small">Test Title</label>
+                            <input type="text" class="form-control" id="testTitle" placeholder="e.g. Algebra Chapter 1 Test" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small">Class</label>
+                            <select class="form-select" id="testClass" required>
+                                <option value="6-8">Class 6 - 8</option>
+                                <option value="9-10">Class 9 - 10</option>
+                                <option value="11-12">Class 11 - 12</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small">Subject</label>
+                            <select class="form-select" id="testSubject" required>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Science">Science</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label small">Duration (Mins)</label>
+                            <input type="number" class="form-control" id="testDuration" value="30" required>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card p-3 rounded-3 mb-4 border border-orange">
+                        <h6 class="fw-bold text-orange">Add Questions (Currently building via JSON for MVP)</h6>
+                        <textarea class="form-control font-monospace text-muted" id="testQuestionsJson" rows="6" placeholder='[{"q":"What is 2+2?","options":["3","4","5","6"],"ans":"4"}]'></textarea>
+                        <div class="form-text">Paste JSON array of questions.</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary-gradient px-5 rounded-pill py-2">Publish Mock Test</button>
+                </form>
+            </div>
+        </section>
+        
+        <!-- ============================================== -->
+        <!-- SECTION 7: GALLERY UPLOAD -->
+        <!-- ============================================== -->
+        <section id="gallery-section" class="dashboard-section">
+            <div class="glass-card p-4 rounded-4 shadow-sm max-w-500 mx-auto" style="max-width: 600px;">
+                <h5 class="fw-bold text-primary-theme mb-4"><i class="fa-solid fa-image text-orange me-2"></i>Upload to Gallery</h5>
+                <form id="uploadGalleryForm">
+                    <div class="mb-3">
+                        <label class="form-label small">Event/Category Name</label>
+                        <input type="text" class="form-control" id="galleryTitle" placeholder="e.g. Annual Function 2025" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label small">Image URL</label>
+                        <input type="url" class="form-control" id="galleryImgUrl" placeholder="https://..." required>
+                        <div class="form-text small">Use Imgur, Firebase Storage, or direct image links.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary-gradient w-100 rounded-pill py-2">Add to Gallery</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- UI Scripts for Sidebar and Tabs -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sidebar Toggle for Mobile
+            const sidebar = document.getElementById('adminSidebar');
+            const toggleBtn = document.getElementById('sidebarToggle');
+            if(toggleBtn) {
+                toggleBtn.addEventListener('click', () => {
+                    sidebar.classList.toggle('show');
+                });
+            }
+
+            // Tab Switching Logic
+            const links = document.querySelectorAll('.sidebar-link[data-target]');
+            const sections = document.querySelectorAll('.dashboard-section');
+            const titleObj = document.getElementById('currentSectionTitle');
+
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // Remove active from all links
+                    links.forEach(l => l.classList.remove('active'));
+                    // Add active to clicked
+                    e.currentTarget.classList.add('active');
+
+                    // Hide all sections
+                    sections.forEach(sec => sec.classList.remove('active'));
+                    
+                    // Show target section
+                    const targetId = e.currentTarget.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+
+                    // Update Title
+                    titleObj.innerText = e.currentTarget.innerText.trim();
+
+                    // Close sidebar on mobile after click
+                    if(window.innerWidth < 992) {
+                        sidebar.classList.remove('show');
+                    }
+                });
+            });
+
+            // Logout Action
+            document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+                sessionStorage.removeItem('isAdminAuthenticated');
+                window.location.href = 'admin-login.html';
+            });
+        });
+    </script>
+
+    <!-- Modals (Edit Student, Pay Fee, jsPDF) will be handled in JS dynamically or injected via DOM -->
+
+    <!-- Firebase SDK & Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <!-- We will create admin.js next for data fetching -->
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>

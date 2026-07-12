@@ -1,0 +1,453 @@
+/* ==========================================================================
+   PG Education - Global Stylesheet
+   Theme: Premium Glassmorphism (Blue, White, Orange)
+   ========================================================================== */
+
+/* Google Fonts: Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ==========================================================================
+   CSS Variables & Theming
+   ========================================================================== */
+:root {
+    /* Brand Colors */
+    --brand-blue: #1e3a8a;
+    --brand-blue-light: #3b82f6;
+    --brand-orange: #f97316;
+    --brand-orange-hover: #ea580c;
+    
+    /* Light Mode (Default) */
+    --bg-main: #f8fafc;
+    --text-primary: #0f172a;
+    --text-muted: #475569;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    --card-hover-bg: rgba(255, 255, 255, 0.9);
+    --input-bg: rgba(255, 255, 255, 0.8);
+    --divider-color: #cbd5e1;
+    --accordion-bg: rgba(255, 255, 255, 0.6);
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+    --bg-main: #0f172a;
+    --text-primary: #f8fafc;
+    --text-muted: #94a3b8;
+    --glass-bg: rgba(15, 23, 42, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --card-hover-bg: rgba(30, 41, 59, 0.8);
+    --input-bg: rgba(15, 23, 42, 0.8);
+    --divider-color: #334155;
+    --accordion-bg: rgba(30, 41, 59, 0.6);
+}
+
+/* ==========================================================================
+   Reset & Base Styles
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Utility Classes */
+.text-orange { color: var(--brand-orange) !important; }
+.bg-orange { background-color: var(--brand-orange) !important; }
+.text-primary-theme { color: var(--text-primary) !important; }
+.text-muted-theme { color: var(--text-muted) !important; }
+.border-secondary-subtle { border-color: var(--divider-color) !important; }
+.bg-orange-subtle { background-color: rgba(249, 115, 22, 0.15) !important; }
+
+/* Text Gradient */
+.text-gradient {
+    background: linear-gradient(135deg, var(--brand-blue-light), var(--brand-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.divider {
+    height: 4px;
+    width: 60px;
+    border-radius: 2px;
+}
+
+/* ==========================================================================
+   Loading Screen
+   ========================================================================== */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-main);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(249, 115, 22, 0.2);
+    border-top-color: var(--brand-orange);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   Background Animations & Shapes
+   ========================================================================== */
+.bg-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.shape {
+    position: absolute;
+    filter: blur(80px);
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: floatShape 15s infinite alternate ease-in-out;
+}
+
+.shape-1 {
+    top: -10%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: rgba(59, 130, 246, 0.3); /* Blue */
+}
+
+.shape-2 {
+    bottom: -10%;
+    right: -5%;
+    width: 500px;
+    height: 500px;
+    background: rgba(249, 115, 22, 0.2); /* Orange */
+}
+
+.shape-3 {
+    top: 40%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: rgba(30, 58, 138, 0.2);
+    animation-duration: 20s;
+}
+
+@keyframes floatShape {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 50px) scale(1.1); }
+}
+
+/* ==========================================================================
+   Glassmorphism Components
+   ========================================================================== */
+.glass-navbar {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+}
+
+.glass-navbar .nav-link {
+    color: var(--text-primary);
+    font-weight: 500;
+    margin: 0 10px;
+    position: relative;
+}
+
+.glass-navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--brand-orange);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.glass-navbar .nav-link:hover::after,
+.glass-navbar .nav-link.active::after {
+    width: 100%;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    background: var(--card-hover-bg);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.glass-dropdown {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+}
+
+.glass-dropdown .dropdown-item {
+    color: var(--text-primary);
+    transition: 0.2s;
+}
+
+.glass-dropdown .dropdown-item:hover {
+    background: var(--brand-orange);
+    color: #fff;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn-primary-gradient {
+    background: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-light));
+    color: #ffffff;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary-gradient:hover {
+    background: linear-gradient(135deg, var(--brand-blue-light), var(--brand-blue));
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+}
+
+.btn-outline-orange {
+    color: var(--brand-orange);
+    border: 2px solid var(--brand-orange);
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-orange:hover {
+    background: var(--brand-orange);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(249, 115, 22, 0.3);
+}
+
+.glass-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+    color: var(--text-primary);
+}
+
+.glass-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--brand-orange);
+}
+
+/* ==========================================================================
+   Floating Elements & Animations
+   ========================================================================== */
+.floating-element {
+    animation: floatUp 4s ease-in-out infinite alternate;
+}
+
+.float-1 { animation-delay: 0s; }
+.float-2 { animation-delay: 2s; }
+
+@keyframes floatUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-15px); }
+}
+
+/* ==========================================================================
+   Specific Sections (Hero, Courses, Faculty)
+   ========================================================================== */
+.hero-section {
+    padding-top: 100px; /* Accounts for fixed navbar */
+}
+
+.hero-img {
+    border: 4px solid var(--glass-border);
+}
+
+.course-card {
+    border-bottom: 4px solid transparent;
+}
+
+.course-card:hover {
+    border-bottom-color: var(--brand-orange);
+    transform: translateY(-10px);
+}
+
+.rounded-bl-3 {
+    border-bottom-left-radius: 15px;
+}
+
+.faculty-card {
+    transition: transform 0.3s ease;
+}
+
+.faculty-card:hover {
+    transform: translateY(-10px);
+}
+
+/* ==========================================================================
+   Accordion & Modals
+   ========================================================================== */
+.glass-accordion .accordion-button {
+    background: var(--accordion-bg);
+    color: var(--text-primary);
+    box-shadow: none;
+    border: 1px solid var(--glass-border);
+}
+
+.glass-accordion .accordion-button:not(.collapsed) {
+    background: var(--brand-orange-hover);
+    color: #fff;
+}
+
+.glass-modal .modal-content {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.premium-footer {
+    border-top: 1px solid var(--glass-border);
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--brand-orange);
+    padding-left: 5px;
+}
+
+.glass-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    transition: transform 0.3s, background 0.3s;
+}
+
+.glass-icon-btn:hover {
+    transform: translateY(-3px);
+    background: var(--bg-main);
+}
+
+/* ==========================================================================
+   Floating Action Buttons
+   ========================================================================== */
+.scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 99;
+}
+
+.scroll-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 55px;
+    height: 55px;
+    text-decoration: none;
+    z-index: 99;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+/* ==========================================================================
+   Forms & Inputs (Global)
+   ========================================================================== */
+.form-control, .form-select {
+    background: var(--input-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.form-control:focus, .form-select:focus {
+    background: var(--input-bg);
+    border-color: var(--brand-orange);
+    box-shadow: 0 0 0 0.25rem rgba(249, 115, 22, 0.25);
+    color: var(--text-primary);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}

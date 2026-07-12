@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PG Education - Admin Portal Login">
+    <meta name="theme-color" content="#1e3a8a">
+    <title>Admin Login | PG Education</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Specific Styles for Admin Login */
+        .admin-login-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(30,58,138,0.9), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            padding: 20px;
+        }
+        
+        .admin-login-card {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            padding: 40px;
+            color: #fff;
+        }
+
+        .admin-login-card .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .admin-login-card .form-control:focus {
+            border-color: var(--brand-orange);
+            box-shadow: 0 0 0 0.25rem rgba(249, 115, 22, 0.25);
+        }
+
+        .admin-login-card .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .input-group-text {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
+            border-right: none;
+        }
+        
+        .admin-login-card .form-control {
+            border-left: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-login-wrapper">
+        <div class="admin-login-card position-relative overflow-hidden">
+            <!-- Decorative badge -->
+            <div class="position-absolute top-0 end-0 bg-danger text-white px-3 py-1 fw-bold" style="border-bottom-left-radius: 15px;">RESTRICTED AREA</div>
+            
+            <div class="text-center mb-4 mt-3">
+                <i class="fa-solid fa-shield-halved text-orange mb-3" style="font-size: 3rem;"></i>
+                <h3 class="fw-bold mb-1">Admin Portal</h3>
+                <p class="text-white-50 small">Enter master credentials to access the ERP</p>
+            </div>
+
+            <form id="adminLoginForm">
+                <div class="mb-4">
+                    <label class="form-label fw-medium small">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user-shield"></i></span>
+                        <input type="text" id="adminUsername" class="form-control" placeholder="Enter Admin Username" required autocomplete="off">
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="form-label fw-medium small">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                        <input type="password" id="adminPassword" class="form-control" placeholder="Enter Admin Password" required>
+                        <button class="btn btn-outline-light border-start-0 border" type="button" id="togglePassword" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2) !important;">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary-gradient w-100 py-2 rounded-pill fw-bold mt-2" id="adminLoginBtn">
+                    Authenticate & Login <i class="fa-solid fa-right-to-bracket ms-2"></i>
+                </button>
+                
+                <div class="text-center mt-4">
+                    <a href="index.html" class="text-white-50 text-decoration-none small hover-orange"><i class="fa-solid fa-arrow-left me-1"></i> Back to Main Website</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Admin Login Logic (Hardcoded as per requirement: UltimateAdmin / Ultimate@2006) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('adminLoginForm');
+            const usernameInput = document.getElementById('adminUsername');
+            const passwordInput = document.getElementById('adminPassword');
+            const togglePasswordBtn = document.getElementById('togglePassword');
+            const loginBtn = document.getElementById('adminLoginBtn');
+
+            // Password Visibility Toggle
+            togglePasswordBtn.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                togglePasswordBtn.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye"></i>' : '<i class="fa-solid fa-eye-slash"></i>';
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const user = usernameInput.value.trim();
+                const pass = passwordInput.value.trim();
+
+                // Validation against required credentials
+                if (user === 'UltimateAdmin' && pass === 'Ultimate@2006') {
+                    // Set secure session flag (In production, Firebase custom claims/roles are better, 
+                    // but since Admin doesn't register via standard Auth here, we use sessionStorage for routing check)
+                    sessionStorage.setItem('isAdminAuthenticated', 'true');
+                    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Access Granted',
+                        text: 'Welcome, Administrator.',
+                        background: '#1e293b',
+                        color: '#fff',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = 'dashboard-admin.html';
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Access Denied',
+                        text: 'Invalid Admin Credentials!',
+                        background: '#1e293b',
+                        color: '#fff',
+                        confirmButtonColor: '#f97316'
+                    });
+                    passwordInput.value = ''; // clear password on failure
+                }
+            });
+        });
+    </script>
+</body>
+</html>

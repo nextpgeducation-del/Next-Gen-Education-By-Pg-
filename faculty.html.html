@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meet the expert faculty at PG Education. Mr. Priyanshu (Mathematics) and Mr. Ravi Yadav (Science) leading students to success.">
+    <meta name="theme-color" content="#1e3a8a">
+    <title>Our Faculty | PG Education</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        .faculty-profile-card {
+            transition: all 0.4s ease;
+            border-bottom: 5px solid transparent;
+        }
+        .faculty-profile-card.math-card:hover {
+            transform: translateY(-10px);
+            border-bottom-color: var(--brand-primary, #0d6efd);
+        }
+        .faculty-profile-card.science-card:hover {
+            transform: translateY(-10px);
+            border-bottom-color: var(--brand-orange, #f97316);
+        }
+        .faculty-img-large {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-top: -80px;
+            border: 6px solid var(--glass-bg);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .faculty-cover {
+            height: 150px;
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    
+    <!-- Loading Screen -->
+    <div id="loader" class="loader-container">
+        <div class="spinner"></div>
+        <h3 class="text-orange mt-3">PG Education</h3>
+    </div>
+
+    <!-- Animated Background Elements -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-gradient" href="index.html">
+                <i class="fa-solid fa-graduation-cap me-2 text-orange"></i>PG Education
+            </a>
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars text-primary-theme"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="faculty.html">Faculty</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown">Resources</a>
+                        <ul class="dropdown-menu glass-dropdown">
+                            <li><a class="dropdown-item" href="notes.html">Notes</a></li>
+                            <li><a class="dropdown-item" href="pyq.html">Previous Year Papers</a></li>
+                            <li><a class="dropdown-item" href="mock-test.html">Mock Tests</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <button id="theme-toggle" class="btn btn-icon glass-btn"><i class="fa-solid fa-moon"></i></button>
+                    <a href="login.html" class="btn btn-outline-orange glass-btn rounded-pill px-4">Login</a>
+                    <a href="register.html" class="btn btn-primary-gradient rounded-pill px-4">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header d-flex align-items-center justify-content-center pt-5 pb-4 mt-5">
+        <div class="container text-center" data-aos="fade-up">
+            <h1 class="display-4 fw-bold text-primary-theme">Our <span class="text-orange">Experts</span></h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center mb-0 mt-3">
+                    <li class="breadcrumb-item"><a href="index.html" class="text-muted-theme text-decoration-none hover-orange">Home</a></li>
+                    <li class="breadcrumb-item active text-orange fw-medium" aria-current="page">Faculty</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Faculty Section -->
+    <section class="py-5 position-relative z-1">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h6 class="text-orange fw-bold text-uppercase">The Pillars of PG Education</h6>
+                <h2 class="fw-bold text-primary-theme">Meet Your Mentors</h2>
+                <p class="text-muted-theme mx-auto" style="max-width: 600px;">Guided by passion and expertise, our two core mentors ensure individual attention and comprehensive mastery over Mathematics and Science.</p>
+                <div class="divider mx-auto bg-orange mt-3"></div>
+            </div>
+
+            <div class="row justify-content-center g-5 pt-5">
+                
+                <!-- Mr. Priyanshu -->
+                <div class="col-lg-5 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="glass-card faculty-profile-card math-card h-100 rounded-4 mt-4">
+                        <div class="faculty-cover" style="background-image: linear-gradient(rgba(30, 58, 138, 0.7), rgba(30, 58, 138, 0.7)), url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="text-center px-4 pb-4">
+                            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Mr. Priyanshu" class="faculty-img-large position-relative">
+                            
+                            <h3 class="fw-bold text-primary-theme mt-3 mb-1">Mr. Priyanshu</h3>
+                            <h6 class="text-primary fw-semibold mb-3"><i class="fa-solid fa-calculator me-2"></i>Head of Mathematics</h6>
+                            
+                            <hr class="border-secondary-subtle">
+                            
+                            <p class="text-muted-theme mt-3">Mr. Priyanshu believes that Mathematics is not about memorizing formulas, but about understanding the logic behind them. With years of experience guiding CBSE and UP Board students, he has developed a unique teaching methodology that turns fear of math into a love for numbers.</p>
+                            
+                            <div class="d-flex justify-content-center gap-3 mt-4">
+                                <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill"><i class="fa-solid fa-book me-1"></i> Class 6-12</span>
+                                <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill"><i class="fa-solid fa-graduation-cap me-1"></i> Expert Educator</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mr. Ravi Yadav -->
+                <div class="col-lg-5 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="glass-card faculty-profile-card science-card h-100 rounded-4 mt-4">
+                        <div class="faculty-cover" style="background-image: linear-gradient(rgba(249, 115, 22, 0.7), rgba(249, 115, 22, 0.7)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="text-center px-4 pb-4">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Mr. Ravi Yadav" class="faculty-img-large position-relative">
+                            
+                            <h3 class="fw-bold text-primary-theme mt-3 mb-1">Mr. Ravi Yadav</h3>
+                            <h6 class="text-orange fw-semibold mb-3"><i class="fa-solid fa-flask me-2"></i>Head of Science</h6>
+                            
+                            <hr class="border-secondary-subtle">
+                            
+                            <p class="text-muted-theme mt-3">Science is the study of the world around us. Mr. Ravi Yadav brings Physics, Chemistry, and Biology to life through practical examples, visual aids, and deep conceptual clarity. His classes are known for being highly engaging, ensuring students master complex concepts with ease.</p>
+                            
+                            <div class="d-flex justify-content-center gap-3 mt-4">
+                                <span class="badge bg-orange-subtle text-orange px-3 py-2 rounded-pill"><i class="fa-solid fa-microscope me-1"></i> Class 6-12</span>
+                                <span class="badge bg-orange-subtle text-orange px-3 py-2 rounded-pill"><i class="fa-solid fa-graduation-cap me-1"></i> Expert Educator</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="premium-footer glass-footer pt-5 pb-3 position-relative z-1 mt-5">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4 col-md-6">
+                    <a class="navbar-brand fw-bold text-gradient fs-3 d-block mb-3" href="index.html">
+                        <i class="fa-solid fa-graduation-cap me-2 text-orange"></i>PG Education
+                    </a>
+                    <p class="text-muted-theme mb-4">Empowering students with premium educational resources, expert faculty, and a vision to lead tomorrow.</p>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="index.html">Home</a></li>
+                        <li class="mb-2"><a href="courses.html">Courses</a></li>
+                        <li class="mb-2"><a href="contact.html">Contact Us</a></li>
+                        <li class="mb-2"><a href="register.html">Admissions</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Contact Info</h5>
+                    <ul class="list-unstyled contact-info text-muted-theme">
+                        <li class="mb-3"><i class="fa-solid fa-location-dot me-2 text-orange"></i> PG Education Center, Uttar Pradesh, India</li>
+                        <li class="mb-3"><i class="fa-solid fa-phone me-2 text-orange"></i> +91 9876543210</li>
+                        <li class="mb-3"><i class="fa-solid fa-envelope me-2 text-orange"></i> info@pgeducation.in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom pt-3 border-top border-secondary-subtle text-center text-muted-theme">
+                <p class="mb-0">&copy; 2026 PG Education. All Rights Reserved. | <a href="admin-login.html" class="text-muted-theme text-decoration-none">Admin Login</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <a href="#" class="scroll-top glass-btn" id="scrollTopBtn"><i class="fa-solid fa-arrow-up"></i></a>
+
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            AOS.init({ once: true, offset: 50 });
+        });
+    </script>
+</body>
+</html>

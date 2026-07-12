@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Download Previous Year Papers (PYQ) and Sample Papers for CBSE and UP Board Class 10 and 12 at PG Education.">
+    <meta name="theme-color" content="#1e3a8a">
+    <title>Previous Year Papers | PG Education</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="light-mode">
+    
+    <!-- Loading Screen -->
+    <div id="loader" class="loader-container">
+        <div class="spinner"></div>
+        <h3 class="text-orange mt-3">PG Education</h3>
+    </div>
+
+    <!-- Animated Background Elements -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-gradient" href="index.html">
+                <i class="fa-solid fa-graduation-cap me-2 text-orange"></i>PG Education
+            </a>
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars text-primary-theme"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faculty.html">Faculty</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown">Resources</a>
+                        <ul class="dropdown-menu glass-dropdown">
+                            <li><a class="dropdown-item" href="notes.html">Notes</a></li>
+                            <li><a class="dropdown-item active" href="pyq.html">Previous Year Papers</a></li>
+                            <li><a class="dropdown-item" href="mock-test.html">Mock Tests</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <button id="theme-toggle" class="btn btn-icon glass-btn"><i class="fa-solid fa-moon"></i></button>
+                    <a href="login.html" class="btn btn-outline-orange glass-btn rounded-pill px-4">Login</a>
+                    <a href="register.html" class="btn btn-primary-gradient rounded-pill px-4">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header d-flex align-items-center justify-content-center pt-5 pb-4 mt-5">
+        <div class="container text-center" data-aos="fade-up">
+            <h1 class="display-4 fw-bold text-primary-theme">Previous Year <span class="text-orange">Papers</span></h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center mb-0 mt-3">
+                    <li class="breadcrumb-item"><a href="index.html" class="text-muted-theme text-decoration-none hover-orange">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#" class="text-muted-theme text-decoration-none">Resources</a></li>
+                    <li class="breadcrumb-item active text-orange fw-medium" aria-current="page">PYQ</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Filter & Search Section -->
+    <section class="py-4 position-relative z-1">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="glass-card p-4 rounded-4 shadow-sm mb-5">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-4">
+                        <label class="form-label text-muted-theme small fw-medium">Search Paper</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-secondary-subtle"><i class="fa-solid fa-search text-muted-theme"></i></span>
+                            <input type="text" id="searchPyqInput" class="form-control border-start-0 ps-0" placeholder="e.g., Mathematics 2023...">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-muted-theme small fw-medium">Board</label>
+                        <select class="form-select" id="filterBoardSelect">
+                            <option value="All">All Boards</option>
+                            <option value="CBSE">CBSE</option>
+                            <option value="UP">UP Board</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label text-muted-theme small fw-medium">Class</label>
+                        <select class="form-select" id="filterClassSelect">
+                            <option value="All">All Classes</option>
+                            <option value="10">Class 10</option>
+                            <option value="12">Class 12</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label text-muted-theme small fw-medium">Year</label>
+                        <select class="form-select" id="filterYearSelect">
+                            <option value="All">All Years</option>
+                            <!-- Dynamic years will be populated if needed, for now standard list -->
+                            <option value="2026">2026</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-outline-orange w-100 rounded-3 py-2" id="resetFilters" title="Reset Filters">
+                            <i class="fa-solid fa-rotate-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PYQ Grid -->
+            <div class="row g-4" id="pyqGrid">
+                <div class="col-12 text-center py-5" id="pyqLoading">
+                    <div class="spinner-border text-primary"></div>
+                    <p class="text-muted-theme mt-3">Fetching papers from archive...</p>
+                </div>
+                <!-- Dynamic Content will be injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="premium-footer glass-footer pt-5 pb-3 position-relative z-1 mt-5">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4 col-md-6">
+                    <a class="navbar-brand fw-bold text-gradient fs-3 d-block mb-3" href="index.html">
+                        <i class="fa-solid fa-graduation-cap me-2 text-orange"></i>PG Education
+                    </a>
+                    <p class="text-muted-theme mb-4">Empowering students with premium educational resources, expert faculty, and a vision to lead tomorrow.</p>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="index.html">Home</a></li>
+                        <li class="mb-2"><a href="courses.html">Courses</a></li>
+                        <li class="mb-2"><a href="contact.html">Contact Us</a></li>
+                        <li class="mb-2"><a href="register.html">Admissions</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Contact Info</h5>
+                    <ul class="list-unstyled contact-info text-muted-theme">
+                        <li class="mb-3"><i class="fa-solid fa-location-dot me-2 text-orange"></i> PG Education Center, Uttar Pradesh, India</li>
+                        <li class="mb-3"><i class="fa-solid fa-phone me-2 text-orange"></i> +91 9876543210</li>
+                        <li class="mb-3"><i class="fa-solid fa-envelope me-2 text-orange"></i> info@pgeducation.in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom pt-3 border-top border-secondary-subtle text-center text-muted-theme">
+                <p class="mb-0">&copy; 2026 PG Education. All Rights Reserved. | <a href="admin-login.html" class="text-muted-theme text-decoration-none">Admin Login</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <a href="#" class="scroll-top glass-btn" id="scrollTopBtn"><i class="fa-solid fa-arrow-up"></i></a>
+
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="js/app.js"></script>
+    
+    <!-- Page Specific Script (Fetch PYQ) -->
+    <script type="module">
+        import { db } from './js/firebase-config.js';
+        import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            AOS.init({ once: true, offset: 50 });
+            
+            let allPapers = [];
+            const pyqGrid = document.getElementById('pyqGrid');
+            const loadingIndicator = document.getElementById('pyqLoading');
+
+            // Fetch Papers from Firestore
+            async function fetchPapers() {
+                try {
+                    const pyqRef = collection(db, "papers");
+                    const q = query(pyqRef, orderBy("createdAt", "desc"));
+                    const snapshot = await getDocs(q);
+                    
+                    snapshot.forEach(docSnap => {
+                        allPapers.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    
+                    // Populate dynamic year dropdown if needed, but static is fine for standard UI
+                    const uniqueYears = [...new Set(allPapers.map(item => item.year))].sort((a,b) => b-a);
+                    const yearSelect = document.getElementById('filterYearSelect');
+                    if(uniqueYears.length > 0) {
+                        yearSelect.innerHTML = '<option value="All">All Years</option>';
+                        uniqueYears.forEach(year => {
+                            yearSelect.innerHTML += `<option value="${year}">${year}</option>`;
+                        });
+                    }
+
+                    loadingIndicator.style.display = 'none';
+                    renderPapers(allPapers);
+                } catch (error) {
+                    console.error("Error fetching papers:", error);
+                    pyqGrid.innerHTML = '<div class="col-12 text-center text-danger py-5">Failed to load previous year papers. Please try again later.</div>';
+                }
+            }
+
+            // Render Papers to Grid
+            function renderPapers(papersArray) {
+                pyqGrid.innerHTML = ''; // Clear current grid
+
+                if (papersArray.length === 0) {
+                    pyqGrid.innerHTML = `
+                        <div class="col-12 text-center py-5">
+                            <div class="icon-box bg-secondary-subtle text-secondary rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                                <i class="fa-solid fa-file-lines fs-2"></i>
+                            </div>
+                            <h5 class="text-primary-theme fw-bold">No Papers Found</h5>
+                            <p class="text-muted-theme">Try adjusting your filters or search criteria.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                papersArray.forEach(paper => {
+                    const boardClass = paper.board === 'CBSE' ? 'bg-primary-subtle text-primary border-primary' : 'bg-orange-subtle text-orange border-orange';
+                    
+                    pyqGrid.innerHTML += `
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                            <div class="glass-card h-100 p-4 rounded-4 position-relative hover-lift">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="badge ${boardClass} border border-opacity-25 rounded-pill px-3 py-1 fw-bold">${paper.board}</span>
+                                    <span class="badge bg-secondary-subtle text-secondary border border-secondary border-opacity-25 rounded-pill px-3 py-1"><i class="fa-solid fa-calendar me-1"></i> ${paper.year}</span>
+                                </div>
+                                <h5 class="fw-bold text-primary-theme mb-2">${paper.title}</h5>
+                                <div class="mb-4 text-muted-theme small">
+                                    <i class="fa-solid fa-graduation-cap me-1"></i> Class ${paper.class}
+                                </div>
+                                <a href="${paper.url}" target="_blank" class="btn btn-outline-primary w-100 rounded-pill py-2 fw-medium">
+                                    Download Paper <i class="fa-solid fa-download ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            // Filtering Logic
+            function filterPapers() {
+                const searchTerm = document.getElementById('searchPyqInput').value.toLowerCase();
+                const boardFilter = document.getElementById('filterBoardSelect').value;
+                const classFilter = document.getElementById('filterClassSelect').value;
+                const yearFilter = document.getElementById('filterYearSelect').value;
+
+                const filtered = allPapers.filter(paper => {
+                    const matchSearch = paper.title.toLowerCase().includes(searchTerm);
+                    const matchBoard = boardFilter === 'All' || paper.board === boardFilter;
+                    const matchClass = classFilter === 'All' || paper.class === classFilter;
+                    const matchYear = yearFilter === 'All' || paper.year === yearFilter;
+                    
+                    return matchSearch && matchBoard && matchClass && matchYear;
+                });
+
+                renderPapers(filtered);
+            }
+
+            // Event Listeners for Filters
+            document.getElementById('searchPyqInput').addEventListener('input', filterPapers);
+            document.getElementById('filterBoardSelect').addEventListener('change', filterPapers);
+            document.getElementById('filterClassSelect').addEventListener('change', filterPapers);
+            document.getElementById('filterYearSelect').addEventListener('change', filterPapers);
+            
+            document.getElementById('resetFilters').addEventListener('click', () => {
+                document.getElementById('searchPyqInput').value = '';
+                document.getElementById('filterBoardSelect').value = 'All';
+                document.getElementById('filterClassSelect').value = 'All';
+                document.getElementById('filterYearSelect').value = 'All';
+                renderPapers(allPapers);
+            });
+
+            // Initialize
+            fetchPapers();
+        });
+    </script>
+</body>
+</html>

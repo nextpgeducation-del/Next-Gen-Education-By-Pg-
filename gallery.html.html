@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View the moments, events, and success stories in the PG Education Gallery.">
+    <meta name="theme-color" content="#1e3a8a">
+    <title>Gallery | PG Education</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Premium Gallery Hover Effects */
+        .gallery-item {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: var(--glass-shadow);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.2));
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-title {
+            color: #fff;
+            font-weight: 600;
+            margin: 0;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+        
+        .gallery-item:hover .gallery-title {
+            transform: translateY(0);
+        }
+
+        .gallery-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--brand-orange);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .gallery-item:hover .gallery-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="light-mode">
+    
+    <!-- Loading Screen -->
+    <div id="loader" class="loader-container">
+        <div class="spinner"></div>
+        <h3 class="text-orange mt-3">PG Education</h3>
+    </div>
+
+    <!-- Animated Background Elements -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-gradient" href="index.html">
+                <i class="fa-solid fa-graduation-cap me-2 text-orange"></i>PG Education
+            </a>
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars text-primary-theme"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faculty.html">Faculty</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown">Resources</a>
+                        <ul class="dropdown-menu glass-dropdown">
+                            <li><a class="dropdown-item" href="notes.html">Notes</a></li>
+                            <li><a class="dropdown-item" href="pyq.html">Previous Year Papers</a></li>
+                            <li><a class="dropdown-item" href="mock-test.html">Mock Tests</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <button id="theme-toggle" class="btn btn-icon glass-btn"><i class="fa-solid fa-moon"></i></button>
+                    <a href="login.html" class="btn btn-outline-orange glass-btn rounded-pill px-4">Login</a>
+                    <a href="register.html" class="btn btn-primary-gradient rounded-pill px-4">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header d-flex align-items-center justify-content-center pt-5 pb-4 mt-5">
+        <div class="container text-center" data-aos="fade-up">
+            <h1 class="display-4 fw-bold text-primary-theme">Life at <span class="text-orange">PG Education</span></h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center mb-0 mt-3">
+                    <li class="breadcrumb-item"><a href="index.html" class="text-muted-theme text-decoration-none hover-orange">Home</a></li>
+                    <li class="breadcrumb-item active text-orange fw-medium" aria-current="page">Gallery</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Filter & Gallery Grid Section -->
+    <section class="py-5 position-relative z-1">
+        <div class="container">
+            <!-- Optional Filter Row (For UI completeness) -->
+            <div class="text-center mb-5" data-aos="fade-up">
+                <div class="d-inline-flex flex-wrap justify-content-center gap-2 bg-transparent p-2 rounded-pill border border-secondary-subtle">
+                    <button class="btn btn-primary-gradient rounded-pill px-4">All</button>
+                    <button class="btn glass-btn rounded-pill px-4 text-muted-theme">Events</button>
+                    <button class="btn glass-btn rounded-pill px-4 text-muted-theme">Achievements</button>
+                    <button class="btn glass-btn rounded-pill px-4 text-muted-theme">Classrooms</button>
+                </div>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="row g-4" id="galleryGrid">
+                <!-- Loading State -->
+                <div class="col-12 text-center py-5" id="galleryLoading">
+                    <div class="spinner-border text-orange mb-3"></div>
+                    <p class="text-muted-theme">Loading memories...</p>
+                </div>
+                <!-- Images injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Fullscreen Modal for Image Preview -->
+    <div class="modal fade glass-modal" id="imagePreviewModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content bg-transparent border-0">
+                <div class="modal-header border-0 pb-0 justify-content-end">
+                    <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center pt-0">
+                    <img src="" id="previewImage" class="img-fluid rounded-4 shadow-lg" style="max-height: 80vh;" alt="Preview">
+                    <h4 class="text-white mt-3 fw-bold" id="previewTitle"></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="premium-footer glass-footer pt-5 pb-3 position-relative z-1 mt-5">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4 col-md-6">
+                    <a class="navbar-brand fw-bold text-gradient fs-3 d-block mb-3" href="index.html">
+                        <i class="fa-solid fa-graduation-cap me-2 text-orange"></i>PG Education
+                    </a>
+                    <p class="text-muted-theme mb-4">Empowering students with premium educational resources, expert faculty, and a vision to lead tomorrow.</p>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="index.html">Home</a></li>
+                        <li class="mb-2"><a href="courses.html">Courses</a></li>
+                        <li class="mb-2"><a href="contact.html">Contact Us</a></li>
+                        <li class="mb-2"><a href="register.html">Admissions</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Contact Info</h5>
+                    <ul class="list-unstyled contact-info text-muted-theme">
+                        <li class="mb-3"><i class="fa-solid fa-location-dot me-2 text-orange"></i> PG Education Center, Uttar Pradesh, India</li>
+                        <li class="mb-3"><i class="fa-solid fa-phone me-2 text-orange"></i> +91 9876543210</li>
+                        <li class="mb-3"><i class="fa-solid fa-envelope me-2 text-orange"></i> info@pgeducation.in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom pt-3 border-top border-secondary-subtle text-center text-muted-theme">
+                <p class="mb-0">&copy; 2026 PG Education. All Rights Reserved. | <a href="admin-login.html" class="text-muted-theme text-decoration-none">Admin Login</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <a href="#" class="scroll-top glass-btn" id="scrollTopBtn"><i class="fa-solid fa-arrow-up"></i></a>
+
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="js/app.js"></script>
+    
+    <!-- Page Specific Script (Fetch Gallery) -->
+    <script type="module">
+        import { db } from './js/firebase-config.js';
+        import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            AOS.init({ once: true, offset: 50 });
+            
+            const galleryGrid = document.getElementById('galleryGrid');
+            const loadingIndicator = document.getElementById('galleryLoading');
+
+            // Hardcoded initial demo images to ensure gallery never looks empty initially
+            const fallbackImages = [
+                { url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", title: "Interactive Learning" },
+                { url: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", title: "Classroom Discussions" },
+                { url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", title: "Dedicated Students" },
+                { url: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", title: "Science Practicals" },
+                { url: "https://images.unsplash.com/photo-1629853965903-53531fb1737e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", title: "Library Archives" },
+                { url: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", title: "Graduation Day" }
+            ];
+
+            async function fetchGallery() {
+                try {
+                    const galleryRef = collection(db, "gallery");
+                    const q = query(galleryRef, orderBy("createdAt", "desc"));
+                    const snapshot = await getDocs(q);
+                    
+                    let images = [];
+                    snapshot.forEach(docSnap => {
+                        images.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    
+                    loadingIndicator.style.display = 'none';
+                    
+                    // If no images uploaded by admin, use fallback
+                    if (images.length === 0) {
+                        images = fallbackImages;
+                    }
+                    
+                    renderGallery(images);
+                } catch (error) {
+                    console.error("Error fetching gallery:", error);
+                    loadingIndicator.style.display = 'none';
+                    renderGallery(fallbackImages); // Fallback on error
+                }
+            }
+
+            function renderGallery(imagesArray) {
+                galleryGrid.innerHTML = '';
+                
+                let delay = 100;
+                imagesArray.forEach((img, index) => {
+                    galleryGrid.innerHTML += `
+                        <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="${delay}">
+                            <div class="gallery-item" onclick="openPreview('${img.url}', '${img.title.replace(/'/g, "\\'")}')">
+                                <img src="${img.url}" alt="${img.title}" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <h5 class="gallery-title">${img.title}</h5>
+                                </div>
+                                <div class="gallery-icon">
+                                    <i class="fa-solid fa-expand"></i>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    delay += 100;
+                    if(delay > 300) delay = 100;
+                });
+            }
+
+            // Global function for onclick preview
+            window.openPreview = (url, title) => {
+                document.getElementById('previewImage').src = url;
+                document.getElementById('previewTitle').innerText = title;
+                
+                const previewModal = new bootstrap.Modal(document.getElementById('imagePreviewModal'));
+                previewModal.show();
+            };
+
+            fetchGallery();
+        });
+    </script>
+</body>
+</html>

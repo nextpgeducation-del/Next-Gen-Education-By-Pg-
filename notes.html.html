@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Download premium study notes for Class 6 to 12 Mathematics and Science at PG Education.">
+    <meta name="theme-color" content="#1e3a8a">
+    <title>Study Notes | PG Education</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="light-mode">
+    
+    <!-- Loading Screen -->
+    <div id="loader" class="loader-container">
+        <div class="spinner"></div>
+        <h3 class="text-orange mt-3">PG Education</h3>
+    </div>
+
+    <!-- Animated Background Elements -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-gradient" href="index.html">
+                <i class="fa-solid fa-graduation-cap me-2 text-orange"></i>PG Education
+            </a>
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars text-primary-theme"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faculty.html">Faculty</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown">Resources</a>
+                        <ul class="dropdown-menu glass-dropdown">
+                            <li><a class="dropdown-item active" href="notes.html">Notes</a></li>
+                            <li><a class="dropdown-item" href="pyq.html">Previous Year Papers</a></li>
+                            <li><a class="dropdown-item" href="mock-test.html">Mock Tests</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <button id="theme-toggle" class="btn btn-icon glass-btn"><i class="fa-solid fa-moon"></i></button>
+                    <a href="login.html" class="btn btn-outline-orange glass-btn rounded-pill px-4">Login</a>
+                    <a href="register.html" class="btn btn-primary-gradient rounded-pill px-4">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header d-flex align-items-center justify-content-center pt-5 pb-4 mt-5">
+        <div class="container text-center" data-aos="fade-up">
+            <h1 class="display-4 fw-bold text-primary-theme">Study <span class="text-orange">Notes</span></h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center mb-0 mt-3">
+                    <li class="breadcrumb-item"><a href="index.html" class="text-muted-theme text-decoration-none hover-orange">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#" class="text-muted-theme text-decoration-none">Resources</a></li>
+                    <li class="breadcrumb-item active text-orange fw-medium" aria-current="page">Notes</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Filter & Search Section -->
+    <section class="py-4 position-relative z-1">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="glass-card p-4 rounded-4 shadow-sm mb-5">
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-5">
+                        <label class="form-label text-muted-theme small fw-medium">Search Topic</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-secondary-subtle"><i class="fa-solid fa-search text-muted-theme"></i></span>
+                            <input type="text" id="searchNotesInput" class="form-control border-start-0 ps-0" placeholder="e.g., Algebra, Kinematics...">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-muted-theme small fw-medium">Filter by Class</label>
+                        <select class="form-select" id="filterClassSelect">
+                            <option value="All">All Classes</option>
+                            <option value="6-8">Class 6 - 8</option>
+                            <option value="9-10">Class 9 - 10</option>
+                            <option value="11-12">Class 11 - 12</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label text-muted-theme small fw-medium">Filter by Subject</label>
+                        <select class="form-select" id="filterSubjectSelect">
+                            <option value="All">All Subjects</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Science">Science</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="btn btn-outline-orange w-100 rounded-3 py-2" id="resetFilters" title="Reset Filters">
+                            <i class="fa-solid fa-rotate-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notes Grid -->
+            <div class="row g-4" id="notesGrid">
+                <div class="col-12 text-center py-5" id="notesLoading">
+                    <div class="spinner-border text-orange"></div>
+                    <p class="text-muted-theme mt-3">Fetching study materials...</p>
+                </div>
+                <!-- Dynamic Content will be injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="premium-footer glass-footer pt-5 pb-3 position-relative z-1 mt-5">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4 col-md-6">
+                    <a class="navbar-brand fw-bold text-gradient fs-3 d-block mb-3" href="index.html">
+                        <i class="fa-solid fa-graduation-cap me-2 text-orange"></i>PG Education
+                    </a>
+                    <p class="text-muted-theme mb-4">Empowering students with premium educational resources, expert faculty, and a vision to lead tomorrow.</p>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Quick Links</h5>
+                    <ul class="list-unstyled footer-links">
+                        <li class="mb-2"><a href="index.html">Home</a></li>
+                        <li class="mb-2"><a href="courses.html">Courses</a></li>
+                        <li class="mb-2"><a href="contact.html">Contact Us</a></li>
+                        <li class="mb-2"><a href="register.html">Admissions</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-primary-theme mb-3">Contact Info</h5>
+                    <ul class="list-unstyled contact-info text-muted-theme">
+                        <li class="mb-3"><i class="fa-solid fa-location-dot me-2 text-orange"></i> PG Education Center, Uttar Pradesh, India</li>
+                        <li class="mb-3"><i class="fa-solid fa-phone me-2 text-orange"></i> +91 9876543210</li>
+                        <li class="mb-3"><i class="fa-solid fa-envelope me-2 text-orange"></i> info@pgeducation.in</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom pt-3 border-top border-secondary-subtle text-center text-muted-theme">
+                <p class="mb-0">&copy; 2026 PG Education. All Rights Reserved. | <a href="admin-login.html" class="text-muted-theme text-decoration-none">Admin Login</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <a href="#" class="scroll-top glass-btn" id="scrollTopBtn"><i class="fa-solid fa-arrow-up"></i></a>
+
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="js/app.js"></script>
+    
+    <!-- Page Specific Script (Fetch Notes) -->
+    <script type="module">
+        import { db } from './js/firebase-config.js';
+        import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            AOS.init({ once: true, offset: 50 });
+            
+            let allNotes = [];
+            const notesGrid = document.getElementById('notesGrid');
+            const loadingIndicator = document.getElementById('notesLoading');
+
+            // Fetch Notes from Firestore
+            async function fetchNotes() {
+                try {
+                    const notesRef = collection(db, "notes");
+                    const q = query(notesRef, orderBy("createdAt", "desc"));
+                    const snapshot = await getDocs(q);
+                    
+                    snapshot.forEach(docSnap => {
+                        allNotes.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    
+                    loadingIndicator.style.display = 'none';
+                    renderNotes(allNotes);
+                } catch (error) {
+                    console.error("Error fetching notes:", error);
+                    notesGrid.innerHTML = '<div class="col-12 text-center text-danger py-5">Failed to load study notes. Please try again later.</div>';
+                }
+            }
+
+            // Render Notes to Grid
+            function renderNotes(notesArray) {
+                notesGrid.innerHTML = ''; // Clear current grid
+
+                if (notesArray.length === 0) {
+                    notesGrid.innerHTML = `
+                        <div class="col-12 text-center py-5">
+                            <div class="icon-box bg-secondary-subtle text-secondary rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                                <i class="fa-solid fa-folder-open fs-2"></i>
+                            </div>
+                            <h5 class="text-primary-theme fw-bold">No Notes Found</h5>
+                            <p class="text-muted-theme">Try adjusting your filters or search criteria.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                notesArray.forEach(note => {
+                    const icon = note.subject === 'Mathematics' ? 'fa-calculator text-primary' : 'fa-flask text-orange';
+                    const badgeClass = note.subject === 'Mathematics' ? 'bg-primary-subtle text-primary' : 'bg-orange-subtle text-orange';
+                    
+                    notesGrid.innerHTML += `
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                            <div class="glass-card h-100 p-4 rounded-4 position-relative hover-lift">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="icon-box bg-transparent border border-secondary-subtle rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                        <i class="fa-solid ${icon} fs-4"></i>
+                                    </div>
+                                    <span class="badge bg-secondary-subtle text-secondary border border-secondary border-opacity-25 rounded-pill px-3 py-1">Class ${note.classGroup}</span>
+                                </div>
+                                <h5 class="fw-bold text-primary-theme mb-2">${note.title}</h5>
+                                <div class="mb-4">
+                                    <span class="badge ${badgeClass} px-2 py-1"><i class="fa-solid fa-bookmark me-1"></i> ${note.subject}</span>
+                                </div>
+                                <a href="${note.url}" target="_blank" class="btn btn-outline-primary w-100 rounded-pill py-2 fw-medium">
+                                    Download PDF <i class="fa-solid fa-download ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            // Filtering Logic
+            function filterNotes() {
+                const searchTerm = document.getElementById('searchNotesInput').value.toLowerCase();
+                const classFilter = document.getElementById('filterClassSelect').value;
+                const subjectFilter = document.getElementById('filterSubjectSelect').value;
+
+                const filtered = allNotes.filter(note => {
+                    const matchSearch = note.title.toLowerCase().includes(searchTerm);
+                    const matchClass = classFilter === 'All' || note.classGroup === classFilter;
+                    const matchSubject = subjectFilter === 'All' || note.subject === subjectFilter;
+                    
+                    return matchSearch && matchClass && matchSubject;
+                });
+
+                renderNotes(filtered);
+            }
+
+            // Event Listeners for Filters
+            document.getElementById('searchNotesInput').addEventListener('input', filterNotes);
+            document.getElementById('filterClassSelect').addEventListener('change', filterNotes);
+            document.getElementById('filterSubjectSelect').addEventListener('change', filterNotes);
+            
+            document.getElementById('resetFilters').addEventListener('click', () => {
+                document.getElementById('searchNotesInput').value = '';
+                document.getElementById('filterClassSelect').value = 'All';
+                document.getElementById('filterSubjectSelect').value = 'All';
+                renderNotes(allNotes);
+            });
+
+            // Initialize
+            fetchNotes();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e3a8a">
+    <title>Student Dashboard | PG Education</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Dashboard Specific Styles */
+        body {
+            background-color: var(--bg-main);
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styling */
+        .student-sidebar {
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1040;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--glass-border);
+            padding-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 10px;
+            margin: 5px 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sidebar-link:hover, .sidebar-link.active {
+            background: var(--brand-blue);
+            color: #fff !important;
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+        }
+
+        .sidebar-link i {
+            width: 25px;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        .student-main-content {
+            margin-left: 280px;
+            padding: 20px;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Top Navbar */
+        .student-topbar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            box-shadow: var(--glass-shadow);
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: linear-gradient(135deg, rgba(30,58,138,0.1), rgba(249,115,22,0.1));
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Tables */
+        .table-glass {
+            background: transparent;
+            color: var(--text-primary);
+        }
+        .table-glass th {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--brand-blue-light);
+            font-weight: 600;
+        }
+        .table-glass td {
+            background: transparent;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--glass-border);
+            vertical-align: middle;
+        }
+        body.dark-mode .table-glass th, body.dark-mode .table-glass td {
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .student-sidebar {
+                transform: translateX(-100%);
+            }
+            .student-sidebar.show {
+                transform: translateX(0);
+            }
+            .student-main-content {
+                margin-left: 0;
+            }
+        }
+
+        /* Tab Content Control */
+        .dashboard-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .dashboard-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+    <!-- Security Check Script (Runs before page loads) -->
+    <script>
+        if (!localStorage.getItem('studentSession')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body class="light-mode">
+
+    <!-- Sidebar -->
+    <nav class="student-sidebar" id="studentSidebar">
+        <div class="text-center mb-4 px-3">
+            <h4 class="fw-bold text-gradient mb-0"><i class="fa-solid fa-graduation-cap text-orange"></i> PG Education</h4>
+            <span class="badge bg-primary-subtle text-primary mt-2">Student Portal</span>
+        </div>
+
+        <div class="sidebar-menu">
+            <div class="sidebar-link active" data-target="overview-section">
+                <i class="fa-solid fa-house"></i> My Profile
+            </div>
+            <div class="sidebar-link" data-target="fees-section">
+                <i class="fa-solid fa-file-invoice-dollar"></i> My Fees
+            </div>
+            <div class="sidebar-link" data-target="materials-section">
+                <i class="fa-solid fa-book-open-reader"></i> Study Materials
+            </div>
+            <div class="sidebar-link" data-target="mock-tests-section">
+                <i class="fa-solid fa-stopwatch"></i> Mock Tests
+            </div>
+            <div class="sidebar-link" data-target="results-section">
+                <i class="fa-solid fa-trophy"></i> Test Results
+            </div>
+            <div class="sidebar-link text-danger mt-5" id="studentLogoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="student-main-content">
+        
+        <!-- Topbar -->
+        <div class="student-topbar">
+            <div class="d-flex align-items-center">
+                <button class="btn glass-btn d-lg-none me-3" id="sidebarToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h5 class="fw-bold text-primary-theme mb-0" id="currentSectionTitle">My Profile</h5>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <button id="theme-toggle" class="btn btn-icon glass-btn rounded-circle"><i class="fa-solid fa-moon"></i></button>
+                <div class="d-flex align-items-center gap-2">
+                    <img src="" id="topbarPhoto" class="rounded-circle border border-2 border-orange" style="width: 40px; height: 40px; object-fit: cover; display: none;">
+                    <div class="d-none d-md-block">
+                        <p class="mb-0 fw-bold text-primary-theme small" id="topbarName">Student Name</p>
+                        <p class="mb-0 text-muted-theme small" style="font-size: 10px;" id="topbarClass">Class --</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SECTION 1: PROFILE & OVERVIEW -->
+        <!-- ============================================== -->
+        <section id="overview-section" class="dashboard-section active">
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="glass-card profile-card p-4 p-md-5 rounded-4 shadow-sm h-100 position-relative overflow-hidden">
+                        <!-- Decorative bg -->
+                        <i class="fa-solid fa-graduation-cap position-absolute opacity-10" style="font-size: 15rem; right: -20px; bottom: -40px; color: var(--brand-blue);"></i>
+                        
+                        <div class="d-flex flex-column flex-md-row align-items-center gap-4 position-relative z-1">
+                            <img src="" id="profilePhoto" class="rounded-circle shadow-lg border border-4 border-white" style="width: 120px; height: 120px; object-fit: cover;">
+                            <div class="text-center text-md-start">
+                                <h3 class="fw-bold text-primary-theme mb-1" id="profileName">Welcome, Loading...</h3>
+                                <p class="text-orange fw-medium mb-3"><i class="fa-solid fa-id-card me-2"></i>ID: <span id="profileID">--</span></p>
+                                
+                                <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-3">
+                                    <span class="badge bg-primary-subtle text-primary px-3 py-2"><i class="fa-solid fa-book-open me-1"></i> Class <span id="profileClass">--</span></span>
+                                    <span class="badge bg-orange-subtle text-orange px-3 py-2"><i class="fa-solid fa-phone me-1"></i> <span id="profileMobile">--</span></span>
+                                    <span class="badge bg-success-subtle text-success px-3 py-2"><i class="fa-solid fa-check-circle me-1"></i> Active</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="glass-card p-4 rounded-4 shadow-sm h-100 d-flex flex-column justify-content-center">
+                        <h5 class="fw-bold text-primary-theme mb-4">Quick Links</h5>
+                        <div class="d-grid gap-3">
+                            <button class="btn btn-outline-primary rounded-pill py-2 text-start px-4" onclick="document.querySelector('[data-target=\'materials-section\']').click()"><i class="fa-solid fa-download me-3"></i> Download Notes</button>
+                            <button class="btn btn-outline-orange rounded-pill py-2 text-start px-4" onclick="document.querySelector('[data-target=\'mock-tests-section\']').click()"><i class="fa-solid fa-stopwatch me-3"></i> Take a Mock Test</button>
+                            <button class="btn btn-primary-gradient rounded-pill py-2 text-start px-4" onclick="document.querySelector('[data-target=\'fees-section\']').click()"><i class="fa-solid fa-indian-rupee-sign me-3"></i> Check Fee Status</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 2: MY FEES -->
+        <!-- ============================================== -->
+        <section id="fees-section" class="dashboard-section">
+            <div class="glass-card p-4 rounded-4 shadow-sm">
+                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary-subtle pb-3">
+                    <h5 class="fw-bold text-primary-theme mb-0">My Fee Records</h5>
+                    <span class="badge bg-warning text-dark"><i class="fa-solid fa-info-circle me-1"></i> Fees must be paid offline at center</span>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-glass align-middle text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Payment Date</th>
+                                <th>Receipt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentFeeBody">
+                            <tr><td colspan="5" class="text-center py-4"><div class="spinner-border text-primary"></div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 3: STUDY MATERIALS -->
+        <!-- ============================================== -->
+        <section id="materials-section" class="dashboard-section">
+            <div class="glass-card p-4 rounded-4 shadow-sm mb-4">
+                <!-- Tabs for Notes vs PYQ -->
+                <ul class="nav nav-pills mb-4" id="materialTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active rounded-pill px-4" id="notes-tab" data-bs-toggle="pill" data-bs-target="#pills-notes" type="button" role="tab">Class Notes</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link rounded-pill px-4" id="pyq-tab" data-bs-toggle="pill" data-bs-target="#pills-pyq" type="button" role="tab">Previous Year Papers</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content" id="materialTabsContent">
+                    <!-- Notes Panel -->
+                    <div class="tab-pane fade show active" id="pills-notes" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-glass align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Topic / Chapter</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="studentNotesBody">
+                                    <tr><td colspan="3" class="text-center py-3 text-muted">Loading notes...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- PYQ Panel -->
+                    <div class="tab-pane fade" id="pills-pyq" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-glass align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Board</th>
+                                        <th>Year</th>
+                                        <th>Paper Title</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="studentPyqBody">
+                                    <tr><td colspan="4" class="text-center py-3 text-muted">Loading papers...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 4: MOCK TESTS -->
+        <!-- ============================================== -->
+        <section id="mock-tests-section" class="dashboard-section">
+            <div class="glass-card p-4 rounded-4 shadow-sm">
+                <h5 class="fw-bold text-primary-theme mb-4 border-bottom border-secondary-subtle pb-3">Available Mock Tests</h5>
+                <div class="row g-4" id="studentTestsGrid">
+                    <div class="col-12 text-center py-4">
+                        <div class="spinner-border text-orange"></div>
+                        <p class="text-muted-theme mt-2">Checking for active tests...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SECTION 5: TEST RESULTS -->
+        <!-- ============================================== -->
+        <section id="results-section" class="dashboard-section">
+            <div class="glass-card p-4 rounded-4 shadow-sm">
+                <h5 class="fw-bold text-primary-theme mb-4 border-bottom border-secondary-subtle pb-3">My Performance</h5>
+                <div class="table-responsive">
+                    <table class="table table-glass align-middle">
+                        <thead>
+                            <tr>
+                                <th>Test Title</th>
+                                <th>Subject</th>
+                                <th>Score</th>
+                                <th>Accuracy</th>
+                                <th>Date Taken</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentResultsBody">
+                            <tr><td colspan="5" class="text-center py-3 text-muted">No test results found.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- UI Scripts for Sidebar and Tabs -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sidebar Toggle for Mobile
+            const sidebar = document.getElementById('studentSidebar');
+            const toggleBtn = document.getElementById('sidebarToggle');
+            if(toggleBtn) {
+                toggleBtn.addEventListener('click', () => {
+                    sidebar.classList.toggle('show');
+                });
+            }
+
+            // Tab Switching Logic
+            const links = document.querySelectorAll('.sidebar-link[data-target]');
+            const sections = document.querySelectorAll('.dashboard-section');
+            const titleObj = document.getElementById('currentSectionTitle');
+
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // Remove active from all links
+                    links.forEach(l => l.classList.remove('active'));
+                    // Add active to clicked
+                    e.currentTarget.classList.add('active');
+
+                    // Hide all sections
+                    sections.forEach(sec => sec.classList.remove('active'));
+                    
+                    // Show target section
+                    const targetId = e.currentTarget.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+
+                    // Update Title
+                    titleObj.innerText = e.currentTarget.innerText.trim();
+
+                    // Close sidebar on mobile after click
+                    if(window.innerWidth < 992) {
+                        sidebar.classList.remove('show');
+                    }
+                });
+            });
+
+            // Logout Action
+            document.getElementById('studentLogoutBtn').addEventListener('click', () => {
+                localStorage.removeItem('studentSession');
+                window.location.href = 'login.html';
+            });
+            
+            // Populate basic UI details from session immediately
+            const session = JSON.parse(localStorage.getItem('studentSession'));
+            if(session) {
+                document.getElementById('topbarName').innerText = session.name.split(' ')[0];
+                document.getElementById('topbarClass').innerText = `Class ${session.class}`;
+                const photoEl = document.getElementById('topbarPhoto');
+                if (session.photo) {
+                    photoEl.src = session.photo;
+                    photoEl.style.display = 'block';
+                }
+                
+                document.getElementById('profileName').innerText = `Welcome, ${session.name}`;
+                document.getElementById('profileID').innerText = session.studentID;
+                document.getElementById('profileClass').innerText = session.class;
+                document.getElementById('profileMobile').innerText = session.mobile;
+                if (session.photo) document.getElementById('profilePhoto').src = session.photo;
+            }
+        });
+    </script>
+
+    <!-- Firebase SDK & Custom Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <!-- Core logic for fetching data to populate this dashboard -->
+    <script type="module" src="js/student.js"></script>
+</body>
+</html>
